@@ -617,8 +617,8 @@
             </div>
             <div class="resume-block">
                 <div class="section-label" id="resume-label">📄 resume</div>
-                <a href="/GameDevelopmentResume.pdf" class="resume-link" id="view-resume" target="_blank">📄 View Resume PDF</a>
-                <a href="/GameDevelopmentResume.pdf" class="download-link" id="download-resume" download>📥 Download Resume</a>
+                <a href="/GameDevelopmentResume.pdf" class="resume-link" target="_blank">📄 View Resume PDF</a>
+                <a href="/GameDevelopmentResume.pdf" class="download-link" download>📥 Download Resume</a>
             </div>
         </div>
     </div>
@@ -632,9 +632,9 @@
                 "profile-name": "Zhong Yue",
                 "profile-bio": "Graduated in Computer Games Development from Asia Pacific University of Technology & Innovation. Fluent in English, Chinese, and Cantonese. Experienced in Unity development across 2D, 3D, VR, and online multiplayer projects. Skilled in 3D modelling with blender and 3dsMax. Capable of developing a complete game independently from concept to completion. This portfolio showcases the projects I have taken part in developing over the years.",
                 "contact-label": "📬 contact",
-                "contact-email": "✉️ johnyue47@gmail.com",
+                "contact-email": " johnyue47@gmail.com",
                 "contact-email-link": "johnyue47@gmail.com",
-                "contact-phone": "📱 +86 132 4259 6903",
+                "contact-phone": " +86 132 4259 6903",
                 "contact-phone-link": "+8613242596903",
                 "contact-social": "💼 linkedin.com/in/john-yue",
                 "contact-social-link": "https://www.linkedin.com/in/john-yue-569b703b3",
@@ -642,23 +642,29 @@
                 "view-resume": "📄 View Resume PDF",
                 "download-resume": "📥 Download Resume",
                 "demo-note": "▶️ click on the selected card for details + full walkthrough",
-                "resume-file": "/GameDevelopmentResume.pdf"
+                "lang-en": "EN",
+                "lang-zh": "中文",
+                "download-jpegs": "🖼️ Download JPEGs",
+                "download-jpegs-zh": "🖼️ 下载JPEG图片"
             },
             zh: {
                 "profile-name": "钟粤",
                 "profile-bio": "毕业于亚太科技大学计算机游戏开发专业。精通英语、中文和粤语。在Unity开发方面经验丰富，涵盖2D、3D、VR等在线多人游戏项目。熟练运用Blender和3dsMax进行3D建模。能够独立完成从概念到完成的完整游戏开发。本作品集展示了多年来参与开发与创作的项目。",
-                "contact-label": "📬 联系方式",
-                "contact-email": " 3027243545@qq.com",
+                "contact-label": "📬联系方式",
+                "contact-email": "钟粤@email.com",
                 "contact-email-link": "3027243545@qq.com",
-                "contact-phone": " +86 132 4259 6903",
+                "contact-phone": "+86 132 4259 6903",
                 "contact-phone-link": "+8613242596903",
-                "contact-social": " 微信: PapajohninKL",
+                "contact-social": "微信: PapajohninKL",
                 "contact-social-link": "#",
                 "resume-label": "📄 简历",
                 "view-resume": "📄 查看简历PDF",
                 "download-resume": "📥 下载简历",
                 "demo-note": "▶️ 点击选中卡片查看详情 + 完整演示",
-                "resume-file": "/ResumeChinese.pdf"
+                "lang-en": "EN",
+                "lang-zh": "中文",
+                "download-jpegs": "🖼️ 下载JPEG图片",
+                "download-jpegs-zh": "🖼️ 下载JPEG图片"
             }
         };
 
@@ -728,8 +734,6 @@
                 platforms: ["unity", "windows"],
                 trailerSrc: "",
                 walkthroughSrc: "",
-                // Adding Bilibili embed for Ninja's Redemption
-                bilibiliEmbed: '<iframe src="//player.bilibili.com/player.html?isOutside=true&aid=116177472919451&bvid=BV18CPyziE2w&cid=36481205708&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="width:100%; height:100%;"></iframe>',
                 icon: "⚔️",
                 poster: "",
                 hasInstaller: true,
@@ -987,10 +991,6 @@
         const contactPhone = document.getElementById('contact-phone');
         const contactSocial = document.getElementById('contact-social');
 
-        // Resume elements
-        const viewResume = document.getElementById('view-resume');
-        const downloadResume = document.getElementById('download-resume');
-
         // Language toggle buttons
         const langEnBtn = document.getElementById('lang-en');
         const langZhBtn = document.getElementById('lang-zh');
@@ -1013,25 +1013,20 @@
             document.getElementById('profile-bio').innerText = translations[lang]['profile-bio'];
             document.getElementById('contact-label').innerText = translations[lang]['contact-label'];
             document.getElementById('resume-label').innerText = translations[lang]['resume-label'];
+            document.getElementById('view-resume').innerText = translations[lang]['view-resume'];
+            document.getElementById('download-resume').innerText = translations[lang]['download-resume'];
             document.getElementById('demo-note').innerText = translations[lang]['demo-note'];
 
             // Update contact information with language-specific content
-            contactEmail.innerHTML = `✉️ <a href="mailto:${translations[lang]['contact-email-link']}">${translations[lang]['contact-email']}</a>`;
-            contactPhone.innerHTML = `📱 <a href="tel:${translations[lang]['contact-phone-link']}">${translations[lang]['contact-phone']}</a>`;
-
             if (lang === 'en') {
+                contactEmail.innerHTML = `✉️ <a href="mailto:${translations.en['contact-email-link']}">${translations.en['contact-email-link']}</a>`;
+                contactPhone.innerHTML = `📱 <a href="tel:${translations.en['contact-phone-link']}">${translations.en['contact-phone-link']}</a>`;
                 contactSocial.innerHTML = `💼 <a href="${translations.en['contact-social-link']}" target="_blank">${translations.en['contact-social']}</a>`;
             } else {
+                contactEmail.innerHTML = `✉️ <a href="mailto:${translations.zh['contact-email-link']}">${translations.zh['contact-email-link']}</a>`;
+                contactPhone.innerHTML = `📱 <a href="tel:${translations.zh['contact-phone-link']}">${translations.zh['contact-phone-link']}</a>`;
                 contactSocial.innerHTML = `💬 <span style="color: #111; border-bottom: 2px solid #aaa;">${translations.zh['contact-social']}</span>`;
             }
-
-            // Update resume links with language-specific PDF
-            viewResume.href = translations[lang]['resume-file'];
-            downloadResume.href = translations[lang]['resume-file'];
-
-            // Update button text
-            viewResume.innerText = translations[lang]['view-resume'];
-            downloadResume.innerText = translations[lang]['download-resume'];
 
             // Update project titles and descriptions in carousel
             renderCarousel();
@@ -1089,7 +1084,7 @@
                     const autoplayAttr = (idx === selectedIdx) ? 'autoplay' : '';
                     mediaContent = `<video class="project-video" src="${project.trailerSrc}" poster="${project.poster || ''}" muted loop playsinline ${autoplayAttr}>${project.icon}</video>`;
                 } else {
-                    mediaContent = `<div class="fake-thumb"><span style="font-size: 3.5rem; filter: drop-shadow(3px 5px 0 #aaa);">${project.icon}</span></div>`;
+                    mediaContent = `<div class="fake-thumb"><span style="font-size: 3.5rem; filter: drop-shadow(3px 5px 0 #aaa;">${project.icon}</span></div>`;
                 }
 
                 // Add platform indicators
@@ -1164,14 +1159,6 @@
             const displayName = currentLang === 'zh' && project.nameZh ? project.nameZh : project.name;
             const displayDescription = currentLang === 'zh' ? project.descriptionZh : project.description;
 
-            // Determine video content - use bilibiliEmbed if available, otherwise use walkthroughSrc
-            let videoContent = '';
-            if (project.bilibiliEmbed) {
-                videoContent = project.bilibiliEmbed;
-            } else {
-                videoContent = `<video src="${project.walkthroughSrc}" poster="${project.poster || ''}" controls autoplay muted loop></video>`;
-            }
-
             const detailPage = `
 <!DOCTYPE html>
 <html>
@@ -1222,11 +1209,10 @@
       margin-bottom: 1rem;
       box-shadow: inset 0 -8px 0 #888, 0 15px 0 #444;
     }
-    video, iframe {
+    video {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border: none;
     }
     .video-label {
       font-size: 1.2rem;
@@ -1305,7 +1291,7 @@
 
     <div class="video-label">${currentLang === 'zh' ? '📽️ 完整演示' : '📽️ Full Walkthrough'}</div>
     <div class="video-container">
-      ${videoContent}
+      <video src="${project.walkthroughSrc}" poster="${project.poster || ''}" controls autoplay muted loop></video>
     </div>
 
     <p style="font-size: 1.5rem; margin: 1.5rem 0; font-weight: 500;">${displayDescription}</p>
