@@ -584,7 +584,7 @@
     <!-- ========== PROFILE SECTION ========== -->
     <div class="profile-row">
         <div class="profile-pic">
-            <img src="https://github.com/Johnyue233/johnyue.github.io/raw/main/profile.jpg" alt="me" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\' viewBox=\'0 0 100 100\'%3E%3Ccircle cx=\'50\' cy=\'50\' r=\'45\' fill=\'%23cccccc\' stroke=\'%23111\' stroke-width=\'4\'/%3E%3Ctext x=\'50\' y=\'70\' font-size=\'50\' text-anchor=\'middle\' fill=\'%23333\' font-family=\'Arial\'%3E👤%3C/text%3E%3C/svg%3E'; this.onerror=null;">        </div>
+            <img src="profile.jpg" alt="me" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\' viewBox=\'0 0 100 100\'%3E%3Ccircle cx=\'50\' cy=\'50\' r=\'45\' fill=\'%23cccccc\' stroke=\'%23111\' stroke-width=\'4\'/%3E%3Ctext x=\'50\' y=\'70\' font-size=\'50\' text-anchor=\'middle\' fill=\'%23333\' font-family=\'Arial\'%3E👤%3C/text%3E%3C/svg%3E'; this.onerror=null;">        </div>
         <div class="profile-bio">
             <div class="bio-name" id="profile-name">Zhong Yue</div>
             <div class="bio-text" id="profile-bio">Graduated in Computer Games Development from Asia Pacific University of Technology & Innovation. Fluent in English, Chinese, and Cantonese. Experienced in Unity development across 2D, 3D, VR, and online multiplayer projects. Skilled in 3D modelling with blender and 3dsMax. Capable of developing a complete game independently from concept to completion. This portfolio showcases the projects I have taken part in developing over the years.</div>
@@ -616,8 +616,8 @@
             </div>
             <div class="resume-block">
                 <div class="section-label" id="resume-label">📄 resume</div>
-                <a href="GameDevelopmentResume.pdf" class="resume-link" target="_blank">📄 View Resume PDF</a>
-                <a href="GameDevelopmentResume.pdf" class="download-link" download>📥 Download Resume</a>
+                <a href="GameDevelopmentResume.pdf" class="resume-link" target="_blank" id="view-resume">📄 View Resume PDF</a>
+                <a href="GameDevelopmentResume.pdf" class="download-link" download id="download-resume">📥 Download Resume</a>
             </div>
         </div>
     </div>
@@ -631,9 +631,9 @@
                 "profile-name": "Zhong Yue",
                 "profile-bio": "Graduated in Computer Games Development from Asia Pacific University of Technology & Innovation. Fluent in English, Chinese, and Cantonese. Experienced in Unity development across 2D, 3D, VR, and online multiplayer projects. Skilled in 3D modelling with blender and 3dsMax. Capable of developing a complete game independently from concept to completion. This portfolio showcases the projects I have taken part in developing over the years.",
                 "contact-label": "📬 contact",
-                "contact-email": " johnyue47@gmail.com",
+                "contact-email": "johnyue47@gmail.com",
                 "contact-email-link": "johnyue47@gmail.com",
-                "contact-phone": " +86 132 4259 6903",
+                "contact-phone": "+86 132 4259 6903",
                 "contact-phone-link": "+8613242596903",
                 "contact-social": "💼 linkedin.com/in/john-yue",
                 "contact-social-link": "https://www.linkedin.com/in/john-yue-569b703b3",
@@ -644,7 +644,7 @@
                 "lang-en": "EN",
                 "lang-zh": "中文",
                 "download-jpegs": "🖼️ Download JPEGs",
-                "download-jpegs-zh": "🖼️ 下载JPEG图片"
+                "resume-file": "GameDevelopmentResume.pdf"
             },
             zh: {
                 "profile-name": "钟粤",
@@ -663,7 +663,7 @@
                 "lang-en": "EN",
                 "lang-zh": "中文",
                 "download-jpegs": "🖼️ 下载JPEG图片",
-                "download-jpegs-zh": "🖼️ 下载JPEG图片"
+                "resume-file": "ResumeChinese.pdf"
             }
         };
 
@@ -1026,7 +1026,7 @@
                 if (el) el.href = href;
             }
 
-            // Update static text elements with safety checks
+            // Update static text elements
             setText('profile-name', translations[lang]['profile-name']);
             setText('profile-bio', translations[lang]['profile-bio']);
             setText('contact-label', translations[lang]['contact-label']);
@@ -1043,13 +1043,21 @@
                 setHTML('contact-social', `💬 <span style="color: #111; border-bottom: 2px solid #aaa;">${translations.zh['contact-social']}</span>`);
             }
 
-            // Update resume links with language-specific PDF
-            setHref('view-resume', translations[lang]['resume-file']);
-            setHref('download-resume', translations[lang]['resume-file']);
+            // ===== UPDATE RESUME LINKS WITH LANGUAGE-SPECIFIC FILES =====
+            const viewResumeLink = document.getElementById('view-resume');
+            const downloadResumeLink = document.getElementById('download-resume');
 
-            // Update button text
-            setText('view-resume', translations[lang]['view-resume']);
-            setText('download-resume', translations[lang]['download-resume']);
+            if (viewResumeLink) {
+                viewResumeLink.href = translations[lang]['resume-file'];
+                viewResumeLink.innerText = translations[lang]['view-resume'];
+            }
+
+            if (downloadResumeLink) {
+                downloadResumeLink.href = translations[lang]['resume-file'];
+                downloadResumeLink.innerText = translations[lang]['download-resume'];
+                // Set download attribute to ensure correct filename
+                downloadResumeLink.download = translations[lang]['resume-file'];
+            }
 
             // Update project titles and descriptions in carousel
             renderCarousel();
