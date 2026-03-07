@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Game Dev Portfolio</title>
+    <title>游戏开发作品集</title>
     <style>
         * {
             margin: 0;
@@ -769,8 +769,8 @@
 <div class="portfolio">
     <!-- ========== LANGUAGE TOGGLE BUTTON ========== -->
     <div class="language-toggle">
-        <button class="lang-btn active" id="lang-en">EN</button>
-        <button class="lang-btn" id="lang-zh">中文</button>
+        <button class="lang-btn" id="lang-en">EN</button>
+        <button class="lang-btn active" id="lang-zh">中文</button>
     </div>
 
     <!-- ========== PROFILE SECTION ========== -->
@@ -779,8 +779,8 @@
             <img src="profile.jpg" alt="me" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\' viewBox=\'0 0 100 100\'%3E%3Ccircle cx=\'50\' cy=\'50\' r=\'45\' fill=\'%23cccccc\' stroke=\'%23111\' stroke-width=\'4\'/%3E%3Ctext x=\'50\' y=\'70\' font-size=\'50\' text-anchor=\'middle\' fill=\'%23333\' font-family=\'Arial\'%3E👤%3C/text%3E%3C/svg%3E'; this.onerror=null;">
         </div>
         <div class="profile-bio">
-            <div class="bio-name" id="profile-name">Zhong Yue</div>
-            <div class="bio-text" id="profile-bio">Graduated in Computer Games Development from Asia Pacific University of Technology & Innovation. Fluent in English, Chinese, and Cantonese. Experienced in Unity development across 2D, 3D, VR, and online multiplayer projects. Skilled in 3D modelling with blender and 3dsMax. Capable of developing a complete game independently from concept to completion. This portfolio showcases the projects I have taken part in developing over the years.</div>
+            <div class="bio-name" id="profile-name">钟粤</div>
+            <div class="bio-text" id="profile-bio">毕业于亚太科技大学计算机游戏开发专业。精通英语、中文和粤语。在Unity开发方面经验丰富，涵盖2D、3D、VR等在线多人游戏项目。熟练运用Blender和3dsMax进行3D建模。能够独立完成从概念到完成的完整游戏开发。本作品集展示了多年来参与开发与创作的项目。</div>
         </div>
     </div>
 
@@ -794,23 +794,23 @@
     <!-- ========== GAME DESCRIPTION ========== -->
     <div class="game-description" id="descriptionPanel">
         <div id="desc-title">LeServe</div>
-        <div id="desc-text">2D/3D two player cooking game that require cooperation with the chef and the waiter to serve all the customer to get to the next level.</div>
-        <div class="demo-note" id="demo-note">▶️ click on the selected card for details + full walkthrough</div>
+        <div id="desc-text">2D/3D双人联机合作烹饪游戏，需要厨师和服务员配合为所有顾客服务。 共三关。</div>
+        <div class="demo-note" id="demo-note">▶️ 点击选中卡片查看详情 + 完整演示</div>
     </div>
 
     <!-- ========== CONTACT & RESUME ========== -->
     <div class="contact-resume-section">
         <div class="info-grid">
             <div class="contact-block">
-                <div class="section-label" id="contact-label">📬 contact</div>
-                <div class="contact-item" id="contact-email">✉️ <a href="mailto:johnyue47@gmail.com">johnyue47@gmail.com</a></div>
+                <div class="section-label" id="contact-label">📬联系方式</div>
+                <div class="contact-item" id="contact-email">✉️ <a href="mailto:3027243545@qq.com">3027243545@qq.com</a></div>
                 <div class="contact-item" id="contact-phone">📱 <a href="tel:+8613242596903">+86 132 4259 6903</a></div>
-                <div class="contact-item" id="contact-social">💼 <a href="https://www.linkedin.com/in/john-yue-569b703b3" target="_blank">linkedin.com/in/john-yue</a></div>
+                <div class="contact-item" id="contact-social">💬 <span style="color: #111; border-bottom: 2px solid #aaa;">微信: PapajohninKL</span></div>
             </div>
             <div class="resume-block">
-                <div class="section-label" id="resume-label">📄 resume</div>
-                <a href="GameDevelopmentResume.pdf" class="resume-link" target="_blank" id="view-resume">📄 View Resume PDF</a>
-                <a href="GameDevelopmentResume.pdf" class="download-link" download id="download-resume">📥 Download Resume</a>
+                <div class="section-label" id="resume-label">📄 简历</div>
+                <a href="ResumeChinese.pdf" class="resume-link" target="_blank" id="view-resume">📄 查看简历PDF</a>
+                <a href="ResumeChinese.pdf" class="download-link" download id="download-resume">📥 下载简历</a>
             </div>
         </div>
     </div>
@@ -828,7 +828,7 @@
                 "contact-email-link": "johnyue47@gmail.com",
                 "contact-phone": "+86 132 4259 6903",
                 "contact-phone-link": "+8613242596903",
-                "contact-social": "💼 linkedin.com/in/john-yue",
+                "contact-social": " linkedin.com/in/john-yue",
                 "contact-social-link": "https://www.linkedin.com/in/john-yue-569b703b3",
                 "resume-label": "📄 resume",
                 "view-resume": "📄 View Resume PDF",
@@ -1279,8 +1279,8 @@
             default: "💻"
         };
 
-        // Current language state
-        let currentLang = 'en';
+        // Current language state - Set to 'zh' as default
+        let currentLang = 'zh';
         let selectedIdx = 2;
         const row = document.getElementById('projectRow');
         const descTitle = document.getElementById('desc-title');
@@ -1767,6 +1767,7 @@
             }
         });
 
+        // Initialize with Chinese language
         renderCarousel();
     })();
 </script>
