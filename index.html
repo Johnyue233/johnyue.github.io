@@ -150,8 +150,8 @@
             margin-bottom: 2rem;
             margin-top: 0.5rem;
             width: 100%;
-            overflow: visible;
-            touch-action: pan-y pinch-zoom; /* Allows vertical scrolling while capturing horizontal swipes */
+            overflow: hidden;
+            touch-action: pan-y pinch-zoom;
         }
 
         .project-row {
@@ -164,9 +164,10 @@
             width: 100%;
             min-height: clamp(250px, 60vw, 360px);
             padding: 10px 0;
-            touch-action: pan-y pinch-zoom; /* Prevents horizontal scrolling while allowing swipes */
-            user-select: none; /* Prevents text selection during swipe */
-            -webkit-tap-highlight-color: transparent; /* Removes tap highlight on mobile */
+            transition: transform 0.3s ease-out;
+            touch-action: pan-y pinch-zoom;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .project-tile {
@@ -185,6 +186,7 @@
             background: #fff;
             cursor: pointer;
             -webkit-tap-highlight-color: transparent;
+            will-change: transform, opacity;
         }
 
         .project-tile.selected {
@@ -338,6 +340,16 @@
         .arrow:active {
             transform: translateY(5px);
             box-shadow: 0 clamp(2px, 1vw, 5px) 0 #222;
+        }
+
+        .arrow.swipe-indicator {
+            animation: pulse 1s ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
 
         /* ---------- GAME DESCRIPTION ---------- */
@@ -704,6 +716,19 @@
         }
         .project-tile.unselected {
             cursor: pointer;
+        }
+
+        /* Swipe animation classes */
+        .project-row.swiping {
+            transition: transform 0.1s ease-out;
+        }
+
+        .project-row.swipe-left {
+            transform: translateX(-20px);
+        }
+
+        .project-row.swipe-right {
+            transform: translateX(20px);
         }
     </style>
 </head>
@@ -1235,7 +1260,10 @@
         // Swipe gesture variables
         let touchStartX = 0;
         let touchEndX = 0;
-        const minSwipeDistance = 50; // Minimum distance for swipe to register
+        let touchStartTime = 0;
+        let isSwiping = false;
+        const minSwipeDistance = 50;
+        const maxSwipeTime = 300; // Max time for swipe in ms
 
         // Function to get platform indicator HTML
         function getPlatformIndicators(platforms) {
@@ -1388,11 +1416,22 @@
                 const previewSrc = currentLang === 'zh' ? project.previewSrcZh : project.previewSrcEn;
 
                 if (previewSrc && previewSrc.trim() !== '') {
-                    // Only selected tile gets autoplay
+                    // For mobile Bilibili, we need to handle autoplay differently
                     let modifiedSrc = previewSrc;
-                    if (modifiedSrc.includes('youtube.com')) {
+
+                    // For Bilibili on mobile, ensure autoplay parameters are correct
+                    if (previewSrc.includes('bilibili.com')) {
+                        // Ensure muted parameter is present for mobile autoplay
+                        if (!modifiedSrc.includes('muted=1')) {
+                            modifiedSrc += '&muted=1';
+                        }
+                        if (!modifiedSrc.includes('autoplay=1')) {
+                            modifiedSrc += '&autoplay=1';
+                        }
+                    } else if (modifiedSrc.includes('youtube.com')) {
                         modifiedSrc = modifiedSrc.replace(/autoplay=[01]/, `autoplay=${idx === selectedIdx ? '1' : '0'}`);
                     }
+
                     mediaContent = `<iframe class="preview-iframe" src="${modifiedSrc}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
                 } else {
                     mediaContent = `<div class="fake-thumb"><span style="font-size: 3.5rem; filter: drop-shadow(3px 5px 0 #aaa);">${project.icon}</span></div>`;
@@ -1647,28 +1686,68 @@
             selectedIdx = (selectedIdx - 1 + projects.length) % projects.length;
             renderCarousel();
             reloadIframes();
+
+            // Animate the arrows to show swipe feedback
+            leftArrow.classList.add('swipe-indicator');
+            setTimeout(() => {
+                leftArrow.classList.remove('swipe-indicator');
+            }, 300);
         }
 
         function selectNext() {
             selectedIdx = (selectedIdx + 1) % projects.length;
             renderCarousel();
             reloadIframes();
+
+            // Animate the arrows to show swipe feedback
+            rightArrow.classList.add('swipe-indicator');
+            setTimeout(() => {
+                rightArrow.classList.remove('swipe-indicator');
+            }, 300);
         }
 
-        // Touch event handlers for swipe
+        // Touch event handlers for swipe with animation
         function handleTouchStart(e) {
             touchStartX = e.changedTouches[0].screenX;
+            touchStartTime = Date.now();
+            isSwiping = true;
+
+            // Remove any existing animation classes
+            row.classList.remove('swipe-left', 'swipe-right');
+        }
+
+        function handleTouchMove(e) {
+            if (!isSwiping) return;
+
+            const currentX = e.changedTouches[0].screenX;
+            const diff = currentX - touchStartX;
+
+            // Add visual feedback during swipe
+            if (Math.abs(diff) > 20) {
+                e.preventDefault(); // Prevent scrolling when swiping horizontally
+                if (diff > 0) {
+                    row.classList.add('swipe-right');
+                    row.classList.remove('swipe-left');
+                } else {
+                    row.classList.add('swipe-left');
+                    row.classList.remove('swipe-right');
+                }
+            }
         }
 
         function handleTouchEnd(e) {
+            if (!isSwiping) return;
+
             touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        }
-
-        function handleSwipe() {
+            const touchEndTime = Date.now();
             const swipeDistance = touchEndX - touchStartX;
+            const swipeTime = touchEndTime - touchStartTime;
 
-            if (Math.abs(swipeDistance) > minSwipeDistance) {
+            // Remove animation classes
+            row.classList.remove('swipe-left', 'swipe-right');
+
+            // Check if it's a valid swipe (fast enough and far enough)
+            if (Math.abs(swipeDistance) > minSwipeDistance && swipeTime < maxSwipeTime) {
                 if (swipeDistance < 0) {
                     // Swipe left - go to next
                     selectNext();
@@ -1677,19 +1756,30 @@
                     selectPrevious();
                 }
             }
+
+            isSwiping = false;
+        }
+
+        function handleTouchCancel() {
+            isSwiping = false;
+            row.classList.remove('swipe-left', 'swipe-right');
         }
 
         leftArrow.addEventListener('click', selectPrevious);
         rightArrow.addEventListener('click', selectNext);
 
-        // Add touch event listeners for swipe
-        row.addEventListener('touchstart', handleTouchStart, { passive: true });
+        // Add touch event listeners for swipe with animation
+        row.addEventListener('touchstart', handleTouchStart, { passive: false });
+        row.addEventListener('touchmove', handleTouchMove, { passive: false });
         row.addEventListener('touchend', handleTouchEnd, { passive: true });
+        row.addEventListener('touchcancel', handleTouchCancel, { passive: true });
 
         // Also add to the whole carousel container for better swipe area
         const carouselContainer = document.querySelector('.carousel-container');
-        carouselContainer.addEventListener('touchstart', handleTouchStart, { passive: true });
+        carouselContainer.addEventListener('touchstart', handleTouchStart, { passive: false });
+        carouselContainer.addEventListener('touchmove', handleTouchMove, { passive: false });
         carouselContainer.addEventListener('touchend', handleTouchEnd, { passive: true });
+        carouselContainer.addEventListener('touchcancel', handleTouchCancel, { passive: true });
 
         window.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowLeft') {
