@@ -343,13 +343,46 @@
         }
 
         .arrow.swipe-indicator {
-            animation: pulse 1s ease-in-out;
+            animation: pulse 0.3s ease-in-out;
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* Video play overlay for Bilibili */
+        .video-play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .project-tile.selected .video-play-overlay {
+            opacity: 1;
+        }
+
+        .play-icon-small {
+            background: white;
+            color: #111;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            border: 2px solid #111;
+            box-shadow: 0 4px 0 #333;
         }
 
         /* ---------- GAME DESCRIPTION ---------- */
@@ -724,11 +757,11 @@
         }
 
         .project-row.swipe-left {
-            transform: translateX(-20px);
+            transform: translateX(-10px);
         }
 
         .project-row.swipe-right {
-            transform: translateX(20px);
+            transform: translateX(10px);
         }
     </style>
 </head>
@@ -874,9 +907,9 @@
                 trailerSrcEn: "",
                 previewSrcEn: "https://www.youtube.com/embed/Bh391RfSF7c?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0&loop=1&playlist=Bh391RfSF7c",
                 walkthroughSrcEn: "eAQV9DamIbA",
-                // Chinese Bilibili trailer
+                // Chinese Bilibili trailer - using embed URL without autoplay parameters
                 trailerSrcZh: "",
-                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472855749&bvid=BV1uCPyziEvm&cid=36481206669&p=1&autoplay=1&muted=1",
+                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472855749&bvid=BV1uCPyziEvm&cid=36481206669&p=1",
                 walkthroughSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472918719&bvid=BV18CPyziEYs&cid=36481206530&p=1",
                 icon: "🍳",
                 poster: "",
@@ -912,7 +945,7 @@
                 previewSrcEn: "https://www.youtube.com/embed/c3EW7gDE3a8?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0&loop=1&playlist=c3EW7gDE3a8",
                 walkthroughSrcEn: "WoqyBO5jYqA",
                 trailerSrcZh: "",
-                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472855715&bvid=BV1uCPyziEqn&cid=36481205606&p=1&autoplay=1&muted=1",
+                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472855715&bvid=BV1uCPyziEqn&cid=36481205606&p=1",
                 walkthroughSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472855715&bvid=BV1uCPyziEqn&cid=36481205606&p=1",
                 icon: "⚔️",
                 poster: "",
@@ -948,7 +981,7 @@
                 previewSrcEn: "https://www.youtube.com/embed/RBUE5s-TOrQ?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0&loop=1&playlist=RBUE5s-TOrQ",
                 walkthroughSrcEn: "RBUE5s-TOrQ",
                 trailerSrcZh: "",
-                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472853417&bvid=BV1gCPyziEuM&cid=36481205995&p=1&autoplay=1&muted=1",
+                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472853417&bvid=BV1gCPyziEuM&cid=36481205995&p=1",
                 walkthroughSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472853417&bvid=BV1gCPyziEuM&cid=36481205995&p=1",
                 icon: "👊",
                 poster: "",
@@ -984,7 +1017,7 @@
                 previewSrcEn: "https://www.youtube.com/embed/Eo0yGaoNo_o?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0&loop=1&playlist=Eo0yGaoNo_o",
                 walkthroughSrcEn: "Eo0yGaoNo_o",
                 trailerSrcZh: "",
-                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472921263&bvid=BV18CPyziEKG&cid=36481206463&p=1&autoplay=1&muted=1",
+                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472921263&bvid=BV18CPyziEKG&cid=36481206463&p=1",
                 walkthroughSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472921263&bvid=BV18CPyziEKG&cid=36481206463&p=1",
                 icon: "👮‍♂️",
                 poster: "",
@@ -1020,7 +1053,7 @@
                 previewSrcEn: "https://www.youtube.com/embed/0JQsaZMfiQ8?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0&loop=1&playlist=0JQsaZMfiQ8",
                 walkthroughSrcEn: "0JQsaZMfiQ8",
                 trailerSrcZh: "",
-                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116183395212608&bvid=BV1zLPbzzEAR&cid=36508271142&p=1&autoplay=1&muted=1",
+                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116183395212608&bvid=BV1zLPbzzEAR&cid=36508271142&p=1",
                 walkthroughSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116183395212608&bvid=BV1zLPbzzEAR&cid=36508271142&p=1",
                 icon: "💀️",
                 poster: "",
@@ -1056,7 +1089,7 @@
                 previewSrcEn: "https://www.youtube.com/embed/HM_1YDrFaGc?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0&loop=1&playlist=HM_1YDrFaGc",
                 walkthroughSrcEn: "HM_1YDrFaGc",
                 trailerSrcZh: "",
-                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116182405357536&bvid=BV1kNP4zBEV2&cid=36503161479&p=1&autoplay=1&muted=1",
+                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116182405357536&bvid=BV1kNP4zBEV2&cid=36503161479&p=1",
                 walkthroughSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116182405357536&bvid=BV1kNP4zBEV2&cid=36503161479&p=1",
                 icon: "🛂",
                 poster: "",
@@ -1093,7 +1126,7 @@
                 previewSrcEn: "https://www.youtube.com/embed/Xs_65R0ghvk?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0&loop=1&playlist=Xs_65R0ghvk",
                 walkthroughSrcEn: "Xs_65R0ghvk",
                 trailerSrcZh: "",
-                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116182422134542&bvid=BV11ZPxzVEQk&cid=36503162459&p=1&autoplay=1&muted=1",
+                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116182422134542&bvid=BV11ZPxzVEQk&cid=36503162459&p=1",
                 walkthroughSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116182422134542&bvid=BV11ZPxzVEQk&cid=36503162459&p=1",
                 icon: "🏰",
                 poster: "",
@@ -1129,7 +1162,7 @@
                 previewSrcEn: "https://www.youtube.com/embed/QPEx7a906D8?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0&loop=1&playlist=QPEx7a906D8",
                 walkthroughSrcEn: "QPEx7a906D8",
                 trailerSrcZh: "",
-                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472853172&bvid=BV1gCPyziEP6&cid=36481206469&p=1&autoplay=1&muted=1",
+                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472853172&bvid=BV1gCPyziEP6&cid=36481206469&p=1",
                 walkthroughSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472853172&bvid=BV1gCPyziEP6&cid=36481206469&p=1",
                 icon: "🏪",
                 poster: "",
@@ -1165,7 +1198,7 @@
                 previewSrcEn: "https://www.youtube.com/embed/ufcn0lZFICg?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0&loop=1&playlist=ufcn0lZFICg",
                 walkthroughSrcEn: "ufcn0lZFICg",
                 trailerSrcZh: "",
-                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177439299804&bvid=BV1NXPyz8Ex7&cid=36481010666&p=1&autoplay=1&muted=1",
+                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177439299804&bvid=BV1NXPyz8Ex7&cid=36481010666&p=1",
                 walkthroughSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177439299804&bvid=BV1NXPyz8Ex7&cid=36481010666&p=1",
                 icon: "🍎",
                 poster: "",
@@ -1201,7 +1234,7 @@
                 previewSrcEn: "https://www.youtube.com/embed/JQglf5qpbec?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0&loop=1&playlist=JQglf5qpbec",
                 walkthroughSrcEn: "JQglf5qpbec",
                 trailerSrcZh: "",
-                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472918715&bvid=BV18CPyziEYn&cid=36481206510&p=1&autoplay=1&muted=1",
+                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472918715&bvid=BV18CPyziEYn&cid=36481206510&p=1",
                 walkthroughSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472918715&bvid=BV18CPyziEYn&cid=36481206510&p=1",
                 icon: "🎨",
                 poster: "",
@@ -1262,8 +1295,8 @@
         let touchEndX = 0;
         let touchStartTime = 0;
         let isSwiping = false;
-        const minSwipeDistance = 50;
-        const maxSwipeTime = 300; // Max time for swipe in ms
+        const minSwipeDistance = 30;
+        const maxSwipeTime = 300;
 
         // Function to get platform indicator HTML
         function getPlatformIndicators(platforms) {
@@ -1309,14 +1342,14 @@
                 if (el) el.href = href;
             }
 
-            // Update static text elements with safety checks
+            // Update static text elements
             setText('profile-name', translations[lang]['profile-name']);
             setText('profile-bio', translations[lang]['profile-bio']);
             setText('contact-label', translations[lang]['contact-label']);
             setText('resume-label', translations[lang]['resume-label']);
             setText('demo-note', translations[lang]['demo-note']);
 
-            // Update contact information with language-specific content
+            // Update contact information
             setHTML('contact-email', `✉️ <a href="mailto:${translations[lang]['contact-email-link']}">${translations[lang]['contact-email']}</a>`);
             setHTML('contact-phone', `📱 <a href="tel:${translations[lang]['contact-phone-link']}">${translations[lang]['contact-phone']}</a>`);
 
@@ -1326,7 +1359,7 @@
                 setHTML('contact-social', `💬 <span style="color: #111; border-bottom: 2px solid #aaa;">${translations.zh['contact-social']}</span>`);
             }
 
-            // ===== UPDATE RESUME LINKS WITH LANGUAGE-SPECIFIC FILES =====
+            // Update resume links
             const viewResumeLink = document.getElementById('view-resume');
             const downloadResumeLink = document.getElementById('download-resume');
 
@@ -1341,7 +1374,7 @@
                 downloadResumeLink.download = translations[lang]['resume-file'];
             }
 
-            // Update project titles and descriptions in carousel
+            // Update project titles and descriptions
             renderCarousel();
         }
 
@@ -1349,23 +1382,7 @@
         langEnBtn.addEventListener('click', () => setLanguage('en'));
         langZhBtn.addEventListener('click', () => setLanguage('zh'));
 
-        // Function to handle video autoplay when tile becomes selected
-        function handleVideoAutoplay() {
-            const selectedVideo = document.querySelector('.project-tile.selected .project-video');
-            if (selectedVideo) {
-                // Pause all other videos first
-                document.querySelectorAll('.project-video').forEach(video => {
-                    if (video !== selectedVideo) {
-                        video.pause();
-                    }
-                });
-                // Play the selected video
-                selectedVideo.play().catch(e => console.log('Autoplay prevented:', e));
-            }
-        }
-
         function reloadIframes() {
-            // Force iframes to reload by toggling their src
             const iframes = document.querySelectorAll('.preview-iframe');
             iframes.forEach(iframe => {
                 const src = iframe.src;
@@ -1394,17 +1411,14 @@
                     else if (position === 2) tile.classList.add('right');
                 }
 
-                // Add click event to ALL tiles
                 tile.setAttribute('data-project-idx', idx);
                 tile.addEventListener('click', function(e) {
                     e.stopPropagation();
                     const clickedIdx = parseInt(this.getAttribute('data-project-idx'));
 
                     if (clickedIdx === selectedIdx) {
-                        // If clicked on selected tile, open detail
                         openProjectDetail(projects[clickedIdx]);
                     } else {
-                        // If clicked on unselected tile, make it selected
                         selectedIdx = clickedIdx;
                         renderCarousel();
                         reloadIframes();
@@ -1412,35 +1426,27 @@
                 });
 
                 let mediaContent = '';
-                // Use language-specific preview source
                 const previewSrc = currentLang === 'zh' ? project.previewSrcZh : project.previewSrcEn;
 
                 if (previewSrc && previewSrc.trim() !== '') {
-                    // For mobile Bilibili, we need to handle autoplay differently
-                    let modifiedSrc = previewSrc;
-
-                    // For Bilibili on mobile, ensure autoplay parameters are correct
+                    // For Bilibili on mobile, we need to use a different approach
                     if (previewSrc.includes('bilibili.com')) {
-                        // Ensure muted parameter is present for mobile autoplay
-                        if (!modifiedSrc.includes('muted=1')) {
-                            modifiedSrc += '&muted=1';
+                        // Bilibili requires user interaction to play on mobile
+                        // We'll use the iframe but it won't autoplay - that's a Bilibili limitation
+                        mediaContent = `<iframe class="preview-iframe" src="${previewSrc}" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>`;
+                    } else {
+                        // YouTube still works with autoplay
+                        let modifiedSrc = previewSrc;
+                        if (modifiedSrc.includes('youtube.com')) {
+                            modifiedSrc = modifiedSrc.replace(/autoplay=[01]/, `autoplay=${idx === selectedIdx ? '1' : '0'}`);
                         }
-                        if (!modifiedSrc.includes('autoplay=1')) {
-                            modifiedSrc += '&autoplay=1';
-                        }
-                    } else if (modifiedSrc.includes('youtube.com')) {
-                        modifiedSrc = modifiedSrc.replace(/autoplay=[01]/, `autoplay=${idx === selectedIdx ? '1' : '0'}`);
+                        mediaContent = `<iframe class="preview-iframe" src="${modifiedSrc}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
                     }
-
-                    mediaContent = `<iframe class="preview-iframe" src="${modifiedSrc}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
                 } else {
                     mediaContent = `<div class="fake-thumb"><span style="font-size: 3.5rem; filter: drop-shadow(3px 5px 0 #aaa);">${project.icon}</span></div>`;
                 }
 
-                // Add platform indicators
                 const platformIndicators = getPlatformIndicators(project.platforms);
-
-                // Use language-specific name
                 const displayName = currentLang === 'zh' && project.nameZh ? project.nameZh : project.name;
 
                 tile.innerHTML = `
@@ -1455,19 +1461,13 @@
             });
 
             const selectedProj = projects[selectedIdx];
-            // Update description panel with language-specific text
             descTitle.innerText = currentLang === 'zh' && selectedProj.nameZh ? selectedProj.nameZh : selectedProj.name;
             descText.innerText = currentLang === 'zh' ? selectedProj.descriptionZh : selectedProj.description;
-
-            // Trigger autoplay after render
-            setTimeout(handleVideoAutoplay, 100);
         }
 
         function openProjectDetail(project) {
-            // Build download buttons based on available options
             let downloadButtonsHTML = '';
 
-            // External demo button (if available)
             if (project.externalDemo && project.externalDemo.hasDemo) {
                 if (project.externalDemo.type === "itch") {
                     downloadButtonsHTML += `<a href="${project.externalDemo.link}" class="btn" target="_blank">${currentLang === 'zh' ? translations.zh['play-itch'] : translations.en['play-itch']}</a>`;
@@ -1476,39 +1476,28 @@
                 }
             }
 
-            // Language-specific links
             const installerLink = currentLang === 'zh' ? project.installerLinkZh : project.installerLinkEn;
             const sourceLink = currentLang === 'zh' ? project.sourceLinkZh : project.sourceLinkEn;
             const buildLink = currentLang === 'zh' ? project.buildLinkZh : project.buildLinkEn;
             const modelLink = currentLang === 'zh' ? project.modelLinkZh : project.modelLinkEn;
             const jpegLink = currentLang === 'zh' ? project.jpegLinkZh : project.jpegLinkEn;
 
-            // Installer button (if available)
             if (project.hasInstaller && installerLink) {
                 downloadButtonsHTML += `<a href="${installerLink}" class="btn" target="_blank">${currentLang === 'zh' ? '💿 下载安装程序' : '💿 Download Installer'}</a>`;
             }
-
-            // Source code button (if available)
             if (project.hasSourceCode && sourceLink) {
                 downloadButtonsHTML += `<a href="${sourceLink}" class="btn" target="_blank">${currentLang === 'zh' ? translations.zh['source-code'] : translations.en['source-code']}</a>`;
             }
-
-            // Build button (if available)
             if (project.hasBuild && buildLink) {
                 downloadButtonsHTML += `<a href="${buildLink}" class="btn" target="_blank">${currentLang === 'zh' ? translations.zh['game-build'] : translations.en['game-build']}</a>`;
             }
-
-            // Model button (if available)
             if (project.hasModel && modelLink) {
                 downloadButtonsHTML += `<a href="${modelLink}" class="btn" target="_blank">${currentLang === 'zh' ? translations.zh['download-model'] : translations.en['download-model']}</a>`;
             }
-
-            // JPEGs button (if available)
             if (project.hasJpegs && jpegLink) {
                 downloadButtonsHTML += `<a href="${jpegLink}" class="btn" target="_blank">${currentLang === 'zh' ? translations.zh['download-jpegs'] : translations.en['download-jpegs']}</a>`;
             }
 
-            // If no download options at all
             if (downloadButtonsHTML === '') {
                 downloadButtonsHTML = `<div class="no-demo">${currentLang === 'zh' ? '🚫 无下载可用' : '🚫 No Downloads Available'}</div>`;
             }
@@ -1516,13 +1505,10 @@
             const displayName = currentLang === 'zh' && project.nameZh ? project.nameZh : project.name;
             const displayDescription = currentLang === 'zh' ? project.descriptionZh : project.description;
 
-            // Generate video embed based on language
             let videoEmbed = '';
             if (currentLang === 'zh' && project.walkthroughSrcZh) {
-                // Bilibili embed
                 videoEmbed = `<iframe src="${project.walkthroughSrcZh}" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="width:100%; height:100%;"></iframe>`;
             } else if (currentLang === 'en' && project.walkthroughSrcEn) {
-                // YouTube embed
                 const youtubeId = project.walkthroughSrcEn;
                 if (youtubeId && youtubeId !== 'YOUR_VIDEO_ID' && !youtubeId.includes('YOUR_VIDEO')) {
                     videoEmbed = `<iframe src="https://www.youtube.com/embed/${youtubeId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%; height:100%;"></iframe>`;
@@ -1687,7 +1673,6 @@
             renderCarousel();
             reloadIframes();
 
-            // Animate the arrows to show swipe feedback
             leftArrow.classList.add('swipe-indicator');
             setTimeout(() => {
                 leftArrow.classList.remove('swipe-indicator');
@@ -1699,20 +1684,17 @@
             renderCarousel();
             reloadIframes();
 
-            // Animate the arrows to show swipe feedback
             rightArrow.classList.add('swipe-indicator');
             setTimeout(() => {
                 rightArrow.classList.remove('swipe-indicator');
             }, 300);
         }
 
-        // Touch event handlers for swipe with animation
+        // Touch event handlers for swipe
         function handleTouchStart(e) {
             touchStartX = e.changedTouches[0].screenX;
             touchStartTime = Date.now();
             isSwiping = true;
-
-            // Remove any existing animation classes
             row.classList.remove('swipe-left', 'swipe-right');
         }
 
@@ -1722,9 +1704,8 @@
             const currentX = e.changedTouches[0].screenX;
             const diff = currentX - touchStartX;
 
-            // Add visual feedback during swipe
-            if (Math.abs(diff) > 20) {
-                e.preventDefault(); // Prevent scrolling when swiping horizontally
+            if (Math.abs(diff) > 10) {
+                e.preventDefault();
                 if (diff > 0) {
                     row.classList.add('swipe-right');
                     row.classList.remove('swipe-left');
@@ -1743,16 +1724,12 @@
             const swipeDistance = touchEndX - touchStartX;
             const swipeTime = touchEndTime - touchStartTime;
 
-            // Remove animation classes
             row.classList.remove('swipe-left', 'swipe-right');
 
-            // Check if it's a valid swipe (fast enough and far enough)
             if (Math.abs(swipeDistance) > minSwipeDistance && swipeTime < maxSwipeTime) {
                 if (swipeDistance < 0) {
-                    // Swipe left - go to next
                     selectNext();
                 } else {
-                    // Swipe right - go to previous
                     selectPrevious();
                 }
             }
@@ -1768,13 +1745,12 @@
         leftArrow.addEventListener('click', selectPrevious);
         rightArrow.addEventListener('click', selectNext);
 
-        // Add touch event listeners for swipe with animation
+        // Add touch event listeners
         row.addEventListener('touchstart', handleTouchStart, { passive: false });
         row.addEventListener('touchmove', handleTouchMove, { passive: false });
         row.addEventListener('touchend', handleTouchEnd, { passive: true });
         row.addEventListener('touchcancel', handleTouchCancel, { passive: true });
 
-        // Also add to the whole carousel container for better swipe area
         const carouselContainer = document.querySelector('.carousel-container');
         carouselContainer.addEventListener('touchstart', handleTouchStart, { passive: false });
         carouselContainer.addEventListener('touchmove', handleTouchMove, { passive: false });
