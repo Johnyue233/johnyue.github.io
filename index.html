@@ -184,14 +184,14 @@
             margin-bottom: 0.8rem;
             overflow: hidden;
             box-shadow: inset 0 -5px 0 #aaa;
+            position: relative;
         }
 
-        .project-video {
+        .preview-iframe {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            background: #1a1a1a;
-            display: block;
+            border: none;
+            pointer-events: none;
         }
 
         .fake-thumb {
@@ -223,7 +223,6 @@
             font-family: 'Fredoka One', 'Poppins', sans-serif;
         }
 
-        /* New cartoon-style platform indicators */
         .platform-indicator {
             display: flex;
             gap: 0.5rem;
@@ -282,11 +281,16 @@
             filter: brightness(0.95);
             border-color: #333;
             box-shadow: 0 10px 0 #555, 0 20px 20px -5px rgba(0,0,0,0.15);
-            pointer-events: none;
         }
 
         .project-tile.unselected.left {
             transform: scale(0.6) rotateY(-15deg) skewY(-1.5deg);
+        }
+
+        .project-tile.unselected:hover {
+            opacity: 0.8;
+            filter: brightness(1);
+            transform: scale(0.65) rotateY(10deg) skewY(1deg);
         }
 
         .project-tile.selected {
@@ -584,7 +588,8 @@
     <!-- ========== PROFILE SECTION ========== -->
     <div class="profile-row">
         <div class="profile-pic">
-            <img src="profile.jpg" alt="me" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\' viewBox=\'0 0 100 100\'%3E%3Ccircle cx=\'50\' cy=\'50\' r=\'45\' fill=\'%23cccccc\' stroke=\'%23111\' stroke-width=\'4\'/%3E%3Ctext x=\'50\' y=\'70\' font-size=\'50\' text-anchor=\'middle\' fill=\'%23333\' font-family=\'Arial\'%3E👤%3C/text%3E%3C/svg%3E'; this.onerror=null;">        </div>
+            <img src="profile.jpg" alt="me" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\' viewBox=\'0 0 100 100\'%3E%3Ccircle cx=\'50\' cy=\'50\' r=\'45\' fill=\'%23cccccc\' stroke=\'%23111\' stroke-width=\'4\'/%3E%3Ctext x=\'50\' y=\'70\' font-size=\'50\' text-anchor=\'middle\' fill=\'%23333\' font-family=\'Arial\'%3E👤%3C/text%3E%3C/svg%3E'; this.onerror=null;">
+        </div>
         <div class="profile-bio">
             <div class="bio-name" id="profile-name">Zhong Yue</div>
             <div class="bio-text" id="profile-bio">Graduated in Computer Games Development from Asia Pacific University of Technology & Innovation. Fluent in English, Chinese, and Cantonese. Experienced in Unity development across 2D, 3D, VR, and online multiplayer projects. Skilled in 3D modelling with blender and 3dsMax. Capable of developing a complete game independently from concept to completion. This portfolio showcases the projects I have taken part in developing over the years.</div>
@@ -641,10 +646,13 @@
                 "view-resume": "📄 View Resume PDF",
                 "download-resume": "📥 Download Resume",
                 "demo-note": "▶️ click on the selected card for details + full walkthrough",
-                "lang-en": "EN",
-                "lang-zh": "中文",
+                "video-label": "📽️ Full Walkthrough",
+                "resume-file": "GameDevelopmentResume.pdf",
+                "source-code": "📦 Source Code",
+                "game-build": "🎮 Download Game Build",
+                "download-model": "📐 Download Model",
                 "download-jpegs": "🖼️ Download JPEGs",
-                "resume-file": "GameDevelopmentResume.pdf"
+                "play-itch": "🎮 Play on Itch.io"
             },
             zh: {
                 "profile-name": "钟粤",
@@ -660,10 +668,13 @@
                 "view-resume": "📄 查看简历PDF",
                 "download-resume": "📥 下载简历",
                 "demo-note": "▶️ 点击选中卡片查看详情 + 完整演示",
-                "lang-en": "EN",
-                "lang-zh": "中文",
+                "video-label": "📽️ 完整演示",
+                "resume-file": "ResumeChinese.pdf",
+                "source-code": "📦 源代码",
+                "game-build": "🎮 下载游戏Build",
+                "download-model": "📐 下载模型",
                 "download-jpegs": "🖼️ 下载JPEG图片",
-                "resume-file": "ResumeChinese.pdf"
+                "play-itch": "🎮 在Itch.io上玩"
             }
         };
 
@@ -704,8 +715,14 @@
                 descriptionZh: "2D/3D双人联机合作烹饪游戏，需要厨师和服务员配合为所有顾客服务。共三关。",
                 platform: "Unity",
                 platforms: ["unity", "windows"],
-                trailerSrc: "",
-                walkthroughSrc: "",
+                // English YouTube trailer
+                trailerSrcEn: "",
+                previewSrcEn: "https://www.youtube.com/embed/Bh391RfSF7c?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0&loop=1&playlist=Bh391RfSF7c",
+                walkthroughSrcEn: "eAQV9DamIbA",
+                // Chinese Bilibili trailer
+                trailerSrcZh: "",
+                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472855749&bvid=BV1uCPyziEvm&cid=36481206669&p=1&autoplay=1&muted=1",
+                walkthroughSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472918719&bvid=BV18CPyziEYs&cid=36481206530&p=1",
                 icon: "🍳",
                 poster: "",
                 hasInstaller: false,
@@ -713,11 +730,16 @@
                 hasModel: false,
                 hasBuild: true,
                 hasJpegs: false,
-                installerLink: "",
-                sourceLink: "",
-                modelLink: "",
-                buildLink: "",
-                jpegLink: "",
+                installerLinkEn: "",
+                installerLinkZh: "",
+                sourceLinkEn: "https://drive.google.com/file/d/11OQtuomiFYFVL4oFsT6lozCIxyQMX5lQ/view?usp=sharing",
+                sourceLinkZh: "https://pan.quark.cn/s/ad76499833c1",
+                modelLinkEn: "",
+                modelLinkZh: "",
+                buildLinkEn: "https://drive.google.com/file/d/1IQj0808s0cDxujbsKf38eV0P1mdiEtvp/view?usp=sharing",
+                buildLinkZh: "https://pan.quark.cn/s/b055806df415",
+                jpegLinkEn: "",
+                jpegLinkZh: "",
                 externalDemo: {
                     hasDemo: false,
                     type: "",
@@ -731,9 +753,12 @@
                 descriptionZh: "2D平台闯关游戏，包含两个关卡和数个敌人种类。",
                 platform: "Unity",
                 platforms: ["unity", "windows"],
-                trailerSrc: "",
-                walkthroughSrc: "",
-                bilibiliEmbed: '<iframe src="//player.bilibili.com/player.html?isOutside=true&aid=116177472919451&bvid=BV18CPyziE2w&cid=36481205708&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="width:100%; height:100%;"></iframe>',
+                trailerSrcEn: "",
+                previewSrcEn: "https://www.youtube.com/embed/c3EW7gDE3a8?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0&loop=1&playlist=c3EW7gDE3a8",
+                walkthroughSrcEn: "WoqyBO5jYqA",
+                trailerSrcZh: "",
+                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472855715&bvid=BV1uCPyziEqn&cid=36481205606&p=1&autoplay=1&muted=1",
+                walkthroughSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472855715&bvid=BV1uCPyziEqn&cid=36481205606&p=1",
                 icon: "⚔️",
                 poster: "",
                 hasInstaller: true,
@@ -741,11 +766,16 @@
                 hasModel: false,
                 hasBuild: true,
                 hasJpegs: false,
-                installerLink: "files/NinjaRedemption Setup (x86).exe",
-                sourceLink: "https://www.alipan.com/s/T1WWv6GWwbP",
-                modelLink: "",
-                buildLink: "",
-                jpegLink: "",
+                installerLinkEn: "https://drive.google.com/file/d/16wLCOTKiJgB3OxZy5p0Oc5P8YjJ0oTaZ/view?usp=sharing",
+                installerLinkZh: "https://pan.quark.cn/s/918e2ebadf25",
+                sourceLinkEn: "https://drive.google.com/file/d/1GSr_VakdVznUhPoI4cQndoGgqijsMALf/view?usp=sharing",
+                sourceLinkZh: "https://pan.quark.cn/s/49c33a217cc0",
+                modelLinkEn: "",
+                modelLinkZh: "",
+                buildLinkEn: "https://drive.google.com/file/d/1XOiZn_ursHiqNlZQJEmC7_5tvHaAt0fm/view?usp=sharing",
+                buildLinkZh: "https://pan.quark.cn/s/dc02018c2a18",
+                jpegLinkEn: "",
+                jpegLinkZh: "",
                 externalDemo: {
                     hasDemo: false,
                     type: "",
@@ -759,8 +789,12 @@
                 descriptionZh: "双人在线格斗游戏，在浮动的MMA擂台中进行战斗。",
                 platform: "Unity",
                 platforms: ["unity", "windows"],
-                trailerSrc: "",
-                walkthroughSrc: "",
+                trailerSrcEn: "",
+                previewSrcEn: "https://www.youtube.com/embed/RBUE5s-TOrQ?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0&loop=1&playlist=RBUE5s-TOrQ",
+                walkthroughSrcEn: "RBUE5s-TOrQ",
+                trailerSrcZh: "",
+                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472853417&bvid=BV1gCPyziEuM&cid=36481205995&p=1&autoplay=1&muted=1",
+                walkthroughSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472853417&bvid=BV1gCPyziEuM&cid=36481205995&p=1",
                 icon: "👊",
                 poster: "",
                 hasInstaller: true,
@@ -768,11 +802,16 @@
                 hasModel: false,
                 hasBuild: false,
                 hasJpegs: false,
-                installerLink: "",
-                sourceLink: "",
-                modelLink: "",
-                buildLink: "",
-                jpegLink: "",
+                installerLinkEn: "https://drive.google.com/file/d/1SGbA5BbWGYDy3CHSdcOnkwrTcy3c7mjQ/view?usp=sharing",
+                installerLinkZh: "https://pan.quark.cn/s/e6c2087a3f3d",
+                sourceLinkEn: "https://drive.google.com/file/d/1Us55VlLPYTadvcoLUnvAFli2mLTiEFhO/view?usp=sharing",
+                sourceLinkZh: "https://pan.quark.cn/s/124d3117d5eb",
+                modelLinkEn: "",
+                modelLinkZh: "",
+                buildLinkEn: "",
+                buildLinkZh: "",
+                jpegLinkEn: "",
+                jpegLinkZh: "",
                 externalDemo: {
                     hasDemo: false,
                     type: "",
@@ -786,8 +825,12 @@
                 descriptionZh: "战术突破 - 战术向单人FPS游戏",
                 platform: "Unity",
                 platforms: ["unity", "windows"],
-                trailerSrc: "",
-                walkthroughSrc: "",
+                trailerSrcEn: "",
+                previewSrcEn: "https://www.youtube.com/embed/Eo0yGaoNo_o?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0&loop=1&playlist=Eo0yGaoNo_o",
+                walkthroughSrcEn: "Eo0yGaoNo_o",
+                trailerSrcZh: "",
+                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472921263&bvid=BV18CPyziEKG&cid=36481206463&p=1&autoplay=1&muted=1",
+                walkthroughSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472921263&bvid=BV18CPyziEKG&cid=36481206463&p=1",
                 icon: "👮‍♂️",
                 poster: "",
                 hasInstaller: false,
@@ -795,15 +838,56 @@
                 hasModel: false,
                 hasBuild: true,
                 hasJpegs: false,
-                installerLink: "",
-                sourceLink: "",
-                modelLink: "",
-                buildLink: "",
-                jpegLink: "",
+                installerLinkEn: "",
+                installerLinkZh: "",
+                sourceLinkEn: "",
+                sourceLinkZh: "",
+                modelLinkEn: "",
+                modelLinkZh: "",
+                buildLinkEn: "https://drive.google.com/file/d/1W0URiDt9EXjfJDY6wHoHreLY_eAkdLbz/view?usp=sharing",
+                buildLinkZh: "https://pan.quark.cn/s/94a53f592967",
+                jpegLinkEn: "",
+                jpegLinkZh: "",
                 externalDemo: {
                     hasDemo: true,
                     type: "itch",
                     link: "https://loo-jian-er.itch.io/operation-groundhog-day"
+                }
+            },
+            {
+                name: "Boneward",
+                nameZh: "骨之守护",
+                description: "A third person perspective action game which takes place in hell in search of the his true form in the adventure of three levels.",
+                descriptionZh: "第三人称视角动作游戏，在炼狱中，玩家将在三个关卡中寻找自己的真身。",
+                platform: "Unity",
+                platforms: ["unity", "windows"],
+                trailerSrcEn: "",
+                previewSrcEn: "https://www.youtube.com/embed/0JQsaZMfiQ8?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0&loop=1&playlist=0JQsaZMfiQ8",
+                walkthroughSrcEn: "0JQsaZMfiQ8",
+                trailerSrcZh: "",
+                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116183395212608&bvid=BV1zLPbzzEAR&cid=36508271142&p=1&autoplay=1&muted=1",
+                walkthroughSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116183395212608&bvid=BV1zLPbzzEAR&cid=36508271142&p=1",
+                icon: "💀️",
+                poster: "",
+                hasInstaller: false,
+                hasSourceCode: false,
+                hasModel: false,
+                hasBuild: false,
+                hasJpegs: false,
+                installerLinkEn: "",
+                installerLinkZh: "",
+                sourceLinkEn: "",
+                sourceLinkZh: "",
+                modelLinkEn: "",
+                modelLinkZh: "",
+                buildLinkEn: "",
+                buildLinkZh: "",
+                jpegLinkEn: "",
+                jpegLinkZh: "",
+                externalDemo: {
+                    hasDemo: false,
+                    type: "",
+                    link: ""
                 }
             },
             {
@@ -813,8 +897,12 @@
                 descriptionZh: "亚航与我校课程合作项目，一款机场海关模拟游戏，玩家将扮演海关官员审查和处理入关的乘客信息。",
                 platform: "Unity",
                 platforms: ["unity", "browser"],
-                trailerSrc: "",
-                walkthroughSrc: "",
+                trailerSrcEn: "",
+                previewSrcEn: "https://www.youtube.com/embed/HM_1YDrFaGc?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0&loop=1&playlist=HM_1YDrFaGc",
+                walkthroughSrcEn: "HM_1YDrFaGc",
+                trailerSrcZh: "",
+                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116182405357536&bvid=BV1kNP4zBEV2&cid=36503161479&p=1&autoplay=1&muted=1",
+                walkthroughSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116182405357536&bvid=BV1kNP4zBEV2&cid=36503161479&p=1",
                 icon: "🛂",
                 poster: "",
                 hasInstaller: false,
@@ -822,11 +910,16 @@
                 hasModel: false,
                 hasBuild: false,
                 hasJpegs: false,
-                installerLink: "",
-                sourceLink: "",
-                modelLink: "",
-                buildLink: "",
-                jpegLink: "",
+                installerLinkEn: "",
+                installerLinkZh: "",
+                sourceLinkEn: "",
+                sourceLinkZh: "",
+                modelLinkEn: "",
+                modelLinkZh: "",
+                buildLinkEn: "",
+                buildLinkZh: "",
+                jpegLinkEn: "",
+                jpegLinkZh: "",
                 externalDemo: {
                     hasDemo: true,
                     type: "itch",
@@ -841,8 +934,12 @@
                 descriptionZh: "鬼屋路易吉3游戏中大厅场景的重新建模，使用Blender建模和渲染",
                 platform: "Blender",
                 platforms: ["blender"],
-                trailerSrc: "",
-                walkthroughSrc: "",
+                trailerSrcEn: "",
+                previewSrcEn: "https://www.youtube.com/embed/Xs_65R0ghvk?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0&loop=1&playlist=Xs_65R0ghvk",
+                walkthroughSrcEn: "Xs_65R0ghvk",
+                trailerSrcZh: "",
+                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116182422134542&bvid=BV11ZPxzVEQk&cid=36503162459&p=1&autoplay=1&muted=1",
+                walkthroughSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116182422134542&bvid=BV11ZPxzVEQk&cid=36503162459&p=1",
                 icon: "🏰",
                 poster: "",
                 hasInstaller: false,
@@ -850,11 +947,16 @@
                 hasModel: true,
                 hasBuild: false,
                 hasJpegs: false,
-                installerLink: "",
-                sourceLink: "",
-                modelLink: "",
-                buildLink: "",
-                jpegLink: "",
+                installerLinkEn: "",
+                installerLinkZh: "",
+                sourceLinkEn: "",
+                sourceLinkZh: "",
+                modelLinkEn: "https://drive.google.com/file/d/1uNgJV0NtQkKBjluOpvblJQVBfNZg1g3Q/view?usp=sharing",
+                modelLinkZh: "https://pan.quark.cn/s/e4b5395a66e9",
+                buildLinkEn: "",
+                buildLinkZh: "",
+                jpegLinkEn: "",
+                jpegLinkZh: "",
                 externalDemo: {
                     hasDemo: false,
                     type: "",
@@ -868,8 +970,12 @@
                 descriptionZh: "藤原豆腐店场景展示，使用Unreal Engine 5渲染，Blender建模。",
                 platform: "Blender, UE5",
                 platforms: ["blender", "unreal"],
-                trailerSrc: "",
-                walkthroughSrc: "",
+                trailerSrcEn: "",
+                previewSrcEn: "https://www.youtube.com/embed/QPEx7a906D8?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0&loop=1&playlist=QPEx7a906D8",
+                walkthroughSrcEn: "QPEx7a906D8",
+                trailerSrcZh: "",
+                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472853172&bvid=BV1gCPyziEP6&cid=36481206469&p=1&autoplay=1&muted=1",
+                walkthroughSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472853172&bvid=BV1gCPyziEP6&cid=36481206469&p=1",
                 icon: "🏪",
                 poster: "",
                 hasInstaller: false,
@@ -877,11 +983,16 @@
                 hasModel: true,
                 hasBuild: false,
                 hasJpegs: false,
-                installerLink: "",
-                sourceLink: "",
-                modelLink: "",
-                buildLink: "",
-                jpegLink: "",
+                installerLinkEn: "",
+                installerLinkZh: "",
+                sourceLinkEn: "",
+                sourceLinkZh: "",
+                modelLinkEn: "https://drive.google.com/file/d/1fteOyXEp1Hs_mNBymn3-Zf9GvQ4jjbAa/view?usp=sharing",
+                modelLinkZh: "https://pan.quark.cn/s/a003ebf33b01",
+                buildLinkEn: "",
+                buildLinkZh: "",
+                jpegLinkEn: "",
+                jpegLinkZh: "",
                 externalDemo: {
                     hasDemo: false,
                     type: "",
@@ -895,8 +1006,12 @@
                 descriptionZh: "在3dsMax中建模的详细3D水果模型集合，以及设计其的纹理和光照。",
                 platform: "3dsmax",
                 platforms: ["3dsmax"],
-                trailerSrc: "",
-                walkthroughSrc: "",
+                trailerSrcEn: "",
+                previewSrcEn: "https://www.youtube.com/embed/ufcn0lZFICg?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0&loop=1&playlist=ufcn0lZFICg",
+                walkthroughSrcEn: "ufcn0lZFICg",
+                trailerSrcZh: "",
+                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177439299804&bvid=BV1NXPyz8Ex7&cid=36481010666&p=1&autoplay=1&muted=1",
+                walkthroughSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177439299804&bvid=BV1NXPyz8Ex7&cid=36481010666&p=1",
                 icon: "🍎",
                 poster: "",
                 hasInstaller: false,
@@ -904,11 +1019,16 @@
                 hasModel: true,
                 hasBuild: false,
                 hasJpegs: false,
-                installerLink: "",
-                sourceLink: "",
-                modelLink: "",
-                buildLink: "",
-                jpegLink: "",
+                installerLinkEn: "",
+                installerLinkZh: "",
+                sourceLinkEn: "",
+                sourceLinkZh: "",
+                modelLinkEn: "",
+                modelLinkZh: "",
+                buildLinkEn: "",
+                buildLinkZh: "",
+                jpegLinkEn: "",
+                jpegLinkZh: "",
                 externalDemo: {
                     hasDemo: false,
                     type: "",
@@ -922,8 +1042,12 @@
                 descriptionZh: "展示以往设计的海报和规则书等平面设计，使用Photoshop制作。",
                 platform: "Photoshop",
                 platforms: ["photoshop"],
-                trailerSrc: "",
-                walkthroughSrc: "",
+                trailerSrcEn: "",
+                previewSrcEn: "https://www.youtube.com/embed/JQglf5qpbec?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0&loop=1&playlist=JQglf5qpbec",
+                walkthroughSrcEn: "JQglf5qpbec",
+                trailerSrcZh: "",
+                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472918715&bvid=BV18CPyziEYn&cid=36481206510&p=1&autoplay=1&muted=1",
+                walkthroughSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472918715&bvid=BV18CPyziEYn&cid=36481206510&p=1",
                 icon: "🎨",
                 poster: "",
                 hasInstaller: false,
@@ -931,11 +1055,16 @@
                 hasModel: false,
                 hasBuild: false,
                 hasJpegs: true,
-                installerLink: "",
-                sourceLink: "",
-                modelLink: "",
-                buildLink: "",
-                jpegLink: "",
+                installerLinkEn: "",
+                installerLinkZh: "",
+                sourceLinkEn: "",
+                sourceLinkZh: "",
+                modelLinkEn: "",
+                modelLinkZh: "",
+                buildLinkEn: "",
+                buildLinkZh: "",
+                jpegLinkEn: "https://drive.google.com/file/d/1NXN5MNXEAB-hyzGZe8AcM3ta1ytHaz3d/view?usp=sharing",
+                jpegLinkZh: "https://pan.quark.cn/s/be56bf20712a",
                 externalDemo: {
                     hasDemo: false,
                     type: "",
@@ -964,6 +1093,14 @@
 
         // Current language state
         let currentLang = 'en';
+        let selectedIdx = 2;
+        const row = document.getElementById('projectRow');
+        const descTitle = document.getElementById('desc-title');
+        const descText = document.getElementById('desc-text');
+        const leftArrow = document.getElementById('arrowLeft');
+        const rightArrow = document.getElementById('arrowRight');
+        const langEnBtn = document.getElementById('lang-en');
+        const langZhBtn = document.getElementById('lang-zh');
 
         // Function to get platform indicator HTML
         function getPlatformIndicators(platforms) {
@@ -977,23 +1114,6 @@
             html += '</div>';
             return html;
         }
-
-        // ================================================================
-        let selectedIdx = 2;
-        const row = document.getElementById('projectRow');
-        const descTitle = document.getElementById('desc-title');
-        const descText = document.getElementById('desc-text');
-        const leftArrow = document.getElementById('arrowLeft');
-        const rightArrow = document.getElementById('arrowRight');
-
-        // Contact elements
-        const contactEmail = document.getElementById('contact-email');
-        const contactPhone = document.getElementById('contact-phone');
-        const contactSocial = document.getElementById('contact-social');
-
-        // Language toggle buttons
-        const langEnBtn = document.getElementById('lang-en');
-        const langZhBtn = document.getElementById('lang-zh');
 
         // Function to update language
         function setLanguage(lang) {
@@ -1026,7 +1146,7 @@
                 if (el) el.href = href;
             }
 
-            // Update static text elements
+            // Update static text elements with safety checks
             setText('profile-name', translations[lang]['profile-name']);
             setText('profile-bio', translations[lang]['profile-bio']);
             setText('contact-label', translations[lang]['contact-label']);
@@ -1055,7 +1175,6 @@
             if (downloadResumeLink) {
                 downloadResumeLink.href = translations[lang]['resume-file'];
                 downloadResumeLink.innerText = translations[lang]['download-resume'];
-                // Set download attribute to ensure correct filename
                 downloadResumeLink.download = translations[lang]['resume-file'];
             }
 
@@ -1082,6 +1201,16 @@
             }
         }
 
+        function reloadIframes() {
+            // Force iframes to reload by toggling their src
+            const iframes = document.querySelectorAll('.preview-iframe');
+            iframes.forEach(iframe => {
+                const src = iframe.src;
+                iframe.src = '';
+                iframe.src = src;
+            });
+        }
+
         function renderCarousel() {
             row.innerHTML = '';
 
@@ -1102,18 +1231,34 @@
                     else if (position === 2) tile.classList.add('right');
                 }
 
-                if (idx === selectedIdx) {
-                    tile.setAttribute('data-project-idx', idx);
-                    tile.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        openProjectDetail(projects[parseInt(this.getAttribute('data-project-idx'))]);
-                    });
-                }
+                // Add click event to ALL tiles
+                tile.setAttribute('data-project-idx', idx);
+                tile.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const clickedIdx = parseInt(this.getAttribute('data-project-idx'));
+
+                    if (clickedIdx === selectedIdx) {
+                        // If clicked on selected tile, open detail
+                        openProjectDetail(projects[clickedIdx]);
+                    } else {
+                        // If clicked on unselected tile, make it selected
+                        selectedIdx = clickedIdx;
+                        renderCarousel();
+                        reloadIframes();
+                    }
+                });
 
                 let mediaContent = '';
-                if (project.trailerSrc && project.trailerSrc.trim() !== '') {
-                    const autoplayAttr = (idx === selectedIdx) ? 'autoplay' : '';
-                    mediaContent = `<video class="project-video" src="${project.trailerSrc}" poster="${project.poster || ''}" muted loop playsinline ${autoplayAttr}>${project.icon}</video>`;
+                // Use language-specific preview source
+                const previewSrc = currentLang === 'zh' ? project.previewSrcZh : project.previewSrcEn;
+
+                if (previewSrc && previewSrc.trim() !== '') {
+                    // Only selected tile gets autoplay
+                    let modifiedSrc = previewSrc;
+                    if (modifiedSrc.includes('youtube.com')) {
+                        modifiedSrc = modifiedSrc.replace(/autoplay=[01]/, `autoplay=${idx === selectedIdx ? '1' : '0'}`);
+                    }
+                    mediaContent = `<iframe class="preview-iframe" src="${modifiedSrc}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
                 } else {
                     mediaContent = `<div class="fake-thumb"><span style="font-size: 3.5rem; filter: drop-shadow(3px 5px 0 #aaa);">${project.icon}</span></div>`;
                 }
@@ -1125,12 +1270,12 @@
                 const displayName = currentLang === 'zh' && project.nameZh ? project.nameZh : project.name;
 
                 tile.innerHTML = `
-          <div class="vid-placeholder">
-            ${mediaContent}
-          </div>
-          <div class="project-title">${displayName}</div>
-          ${platformIndicators}
-        `;
+                    <div class="vid-placeholder">
+                        ${mediaContent}
+                    </div>
+                    <div class="project-title">${displayName}</div>
+                    ${platformIndicators}
+                `;
 
                 row.appendChild(tile);
             });
@@ -1151,35 +1296,42 @@
             // External demo button (if available)
             if (project.externalDemo && project.externalDemo.hasDemo) {
                 if (project.externalDemo.type === "itch") {
-                    downloadButtonsHTML += `<a href="${project.externalDemo.link}" class="btn" target="_blank">${currentLang === 'zh' ? '🎮 在Itch.io上玩' : '🎮 Play on Itch.io'}</a>`;
+                    downloadButtonsHTML += `<a href="${project.externalDemo.link}" class="btn" target="_blank">${currentLang === 'zh' ? translations.zh['play-itch'] : translations.en['play-itch']}</a>`;
                 } else {
                     downloadButtonsHTML += `<a href="${project.externalDemo.link}" class="btn" target="_blank">${currentLang === 'zh' ? '▶️ 可玩演示' : '▶️ Playable Demo'}</a>`;
                 }
             }
 
+            // Language-specific links
+            const installerLink = currentLang === 'zh' ? project.installerLinkZh : project.installerLinkEn;
+            const sourceLink = currentLang === 'zh' ? project.sourceLinkZh : project.sourceLinkEn;
+            const buildLink = currentLang === 'zh' ? project.buildLinkZh : project.buildLinkEn;
+            const modelLink = currentLang === 'zh' ? project.modelLinkZh : project.modelLinkEn;
+            const jpegLink = currentLang === 'zh' ? project.jpegLinkZh : project.jpegLinkEn;
+
             // Installer button (if available)
-            if (project.hasInstaller && project.installerLink) {
-                downloadButtonsHTML += `<a href="${project.installerLink}" class="btn" download>${currentLang === 'zh' ? '💿 下载安装程序' : '💿 Download Installer'}</a>`;
+            if (project.hasInstaller && installerLink) {
+                downloadButtonsHTML += `<a href="${installerLink}" class="btn" target="_blank">${currentLang === 'zh' ? '💿 下载安装程序' : '💿 Download Installer'}</a>`;
             }
 
             // Source code button (if available)
-            if (project.hasSourceCode && project.sourceLink) {
-                downloadButtonsHTML += `<a href="${project.sourceLink}" class="btn" target="_blank">${currentLang === 'zh' ? '📦 源代码' : '📦 Source Code'}</a>`;
+            if (project.hasSourceCode && sourceLink) {
+                downloadButtonsHTML += `<a href="${sourceLink}" class="btn" target="_blank">${currentLang === 'zh' ? translations.zh['source-code'] : translations.en['source-code']}</a>`;
             }
 
             // Build button (if available)
-            if (project.hasBuild && project.buildLink) {
-                downloadButtonsHTML += `<a href="${project.buildLink}" class="btn" download>${currentLang === 'zh' ? '🎮 下载Build文件' : '🎮 Download Game Build'}</a>`;
+            if (project.hasBuild && buildLink) {
+                downloadButtonsHTML += `<a href="${buildLink}" class="btn" target="_blank">${currentLang === 'zh' ? translations.zh['game-build'] : translations.en['game-build']}</a>`;
             }
 
             // Model button (if available)
-            if (project.hasModel && project.modelLink) {
-                downloadButtonsHTML += `<a href="${project.modelLink}" class="btn" download>${currentLang === 'zh' ? '📐 下载模型' : '📐 Download Model'}</a>`;
+            if (project.hasModel && modelLink) {
+                downloadButtonsHTML += `<a href="${modelLink}" class="btn" target="_blank">${currentLang === 'zh' ? translations.zh['download-model'] : translations.en['download-model']}</a>`;
             }
 
             // JPEGs button (if available)
-            if (project.hasJpegs && project.jpegLink) {
-                downloadButtonsHTML += `<a href="${project.jpegLink}" class="btn" download>${currentLang === 'zh' ? translations.zh['download-jpegs'] : translations.en['download-jpegs']}</a>`;
+            if (project.hasJpegs && jpegLink) {
+                downloadButtonsHTML += `<a href="${jpegLink}" class="btn" target="_blank">${currentLang === 'zh' ? translations.zh['download-jpegs'] : translations.en['download-jpegs']}</a>`;
             }
 
             // If no download options at all
@@ -1190,12 +1342,17 @@
             const displayName = currentLang === 'zh' && project.nameZh ? project.nameZh : project.name;
             const displayDescription = currentLang === 'zh' ? project.descriptionZh : project.description;
 
-            // Determine video content - use bilibiliEmbed if available, otherwise use walkthroughSrc
-            let videoContent = '';
-            if (project.bilibiliEmbed) {
-                videoContent = project.bilibiliEmbed;
-            } else {
-                videoContent = `<video src="${project.walkthroughSrc}" poster="${project.poster || ''}" controls autoplay muted loop></video>`;
+            // Generate video embed based on language
+            let videoEmbed = '';
+            if (currentLang === 'zh' && project.walkthroughSrcZh) {
+                // Bilibili embed
+                videoEmbed = `<iframe src="${project.walkthroughSrcZh}" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="width:100%; height:100%;"></iframe>`;
+            } else if (currentLang === 'en' && project.walkthroughSrcEn) {
+                // YouTube embed
+                const youtubeId = project.walkthroughSrcEn;
+                if (youtubeId && youtubeId !== 'YOUR_VIDEO_ID' && !youtubeId.includes('YOUR_VIDEO')) {
+                    videoEmbed = `<iframe src="https://www.youtube.com/embed/${youtubeId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%; height:100%;"></iframe>`;
+                }
             }
 
             const detailPage = `
@@ -1329,9 +1486,9 @@
   <div class="detail-card">
     <h1>${displayName}</h1>
 
-    <div class="video-label">${currentLang === 'zh' ? '📽️ 完整演示' : '📽️ Full Walkthrough'}</div>
+    <div class="video-label">${currentLang === 'zh' ? translations.zh['video-label'] : translations.en['video-label']}</div>
     <div class="video-container">
-      ${videoContent}
+      ${videoEmbed || '<div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#333; color:white;">🎥 Video coming soon</div>'}
     </div>
 
     <p style="font-size: 1.5rem; margin: 1.5rem 0; font-weight: 500;">${displayDescription}</p>
@@ -1354,11 +1511,13 @@
         function selectPrevious() {
             selectedIdx = (selectedIdx - 1 + projects.length) % projects.length;
             renderCarousel();
+            reloadIframes();
         }
 
         function selectNext() {
             selectedIdx = (selectedIdx + 1) % projects.length;
             renderCarousel();
+            reloadIframes();
         }
 
         leftArrow.addEventListener('click', selectPrevious);
@@ -1374,23 +1533,6 @@
             }
         });
 
-        renderCarousel();
-
-        function addDemoIndicator() {
-            const selectedTile = document.querySelector('.project-tile.selected .vid-placeholder');
-            if (!selectedTile) return;
-            const fakeSpan = selectedTile.querySelector('.fake-thumb span');
-            if (fakeSpan && !fakeSpan.innerHTML.includes('▶')) {
-                fakeSpan.innerHTML = '▶ ' + fakeSpan.innerHTML;
-            }
-        }
-
-        const originalRender = renderCarousel;
-        renderCarousel = function() {
-            originalRender();
-            addDemoIndicator();
-            handleVideoAutoplay();
-        };
         renderCarousel();
     })();
 </script>
@@ -1415,6 +1557,15 @@
     }
     .tile-platform {
         margin-top: 0.4rem;
+    }
+    .preview-iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        pointer-events: none;
+    }
+    .project-tile.unselected {
+        cursor: pointer;
     }
 </style>
 </body>
