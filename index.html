@@ -245,6 +245,22 @@
             pointer-events: none;
         }
 
+        .preview-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: #0a0a0a;
+            border-radius: 24px 24px 14px 14px;
+            pointer-events: none;
+        }
+
+        .detail-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: #0a0a0a;
+        }
+
         .fake-thumb {
             width: 100%;
             height: 100%;
@@ -351,7 +367,7 @@
             50% { transform: scale(1.2); }
         }
 
-        /* Video play overlay for Bilibili */
+        /* Video play overlay */
         .video-play-overlay {
             position: absolute;
             top: 0;
@@ -721,18 +737,12 @@
             max-width: 100%;
         }
 
-        .project-video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            background: #0a0a0a;
-            border-radius: 24px 24px 14px 14px;
-        }
         .vid-placeholder {
             padding: 0;
             line-height: 0;
         }
-        .project-tile.selected .project-video {
+        .project-tile.selected .preview-video,
+        .project-tile.selected .preview-iframe {
             border-radius: 24px 24px 14px 14px;
         }
         .project-tile {
@@ -740,12 +750,6 @@
         }
         .tile-platform {
             margin-top: 0.4rem;
-        }
-        .preview-iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            pointer-events: none;
         }
         .project-tile.unselected {
             cursor: pointer;
@@ -866,34 +870,6 @@
             }
         };
 
-        // Project descriptions in both languages
-        const projectTranslations = {
-            en: [
-                "2D/3D two player cooking game that require cooperation with the chef and the waiter to serve all the customer to get to the next level.",
-                "2D platformer game that consist of two levels and dozen enemy.",
-                "2 Player Online fighting game that takes place in a floating mma ring.",
-                "Operation Groundhog Day - Tactical Singleplayer FPS",
-                "Airasia Collaborating project, An airport custom simulation game where you will be playing as the custom officer to match weird information from the customers.",
-                "Boneward - A Unity game project",
-                "A recreation of the Luigi Mansion 3 game, modeled and rendered using Blender only.",
-                "A display of the Fujiwara tofu shop scene, rendered using Unreal Engine 5, modeled using Blender.",
-                "A collection of detailed 3D fruit models created in 3dsMax, featuring realistic textures and lighting.",
-                "A showcase of all the designs of posters and rulebook etc using Photoshop."
-            ],
-            zh: [
-                "2D/3D双人联机合作烹饪游戏，需要厨师和服务员配合为所有顾客服务。 共三关。",
-                "2D平台游戏，包含两个关卡和数个敌人种类。",
-                "双人在线格斗游戏，在浮动的MMA擂台中进行战斗。",
-                "战术突破 - 战术向单人FPS游戏",
-                "亚航与我校课程合作项目，一款机场海关模拟游戏，玩家将扮演海关官员审查和处理入关的乘客信息。",
-                "Boneward - Unity游戏项目",
-                "鬼屋路易吉3 游戏的重新建模，使用Blender建模和渲染。",
-                "藤原豆腐店场景展示，使用Unreal Engine 5渲染，Blender建模。",
-                "在3dsMax中建模的详细3D水果模型集合，以及设计其的纹理和光照。",
-                "展示所有海报和规则书等平面设计，使用Photoshop制作。"
-            ]
-        };
-
         // ================= PROJECT DATA =================
         const projects = [
             {
@@ -903,14 +879,7 @@
                 descriptionZh: "2D/3D双人联机合作烹饪游戏，需要厨师和服务员配合为所有顾客服务。共三关。",
                 platform: "Unity",
                 platforms: ["unity", "windows"],
-                // English YouTube trailer
-                trailerSrcEn: "",
-                previewSrcEn: "https://www.youtube.com/embed/Bh391RfSF7c?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0&loop=1&playlist=Bh391RfSF7c",
-                walkthroughSrcEn: "eAQV9DamIbA",
-                // Chinese Bilibili trailer - using embed URL without autoplay parameters
-                trailerSrcZh: "",
-                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472855749&bvid=BV1uCPyziEvm&cid=36481206669&p=1",
-                walkthroughSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472918719&bvid=BV18CPyziEYs&cid=36481206530&p=1",
+                videoSrc: "videos/LeServe.mp4", // Add your video file
                 icon: "🍳",
                 poster: "",
                 hasInstaller: false,
@@ -941,12 +910,7 @@
                 descriptionZh: "2D平台闯关游戏，包含两个关卡和数个敌人种类。",
                 platform: "Unity",
                 platforms: ["unity", "windows"],
-                trailerSrcEn: "",
-                previewSrcEn: "https://www.youtube.com/embed/c3EW7gDE3a8?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0&loop=1&playlist=c3EW7gDE3a8",
-                walkthroughSrcEn: "WoqyBO5jYqA",
-                trailerSrcZh: "",
-                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472855715&bvid=BV1uCPyziEqn&cid=36481205606&p=1",
-                walkthroughSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472855715&bvid=BV1uCPyziEqn&cid=36481205606&p=1",
+                videoSrc: "videos/NinjasRedemption.mp4", // Add your video file
                 icon: "⚔️",
                 poster: "",
                 hasInstaller: true,
@@ -977,12 +941,7 @@
                 descriptionZh: "双人在线格斗游戏，在浮动的MMA擂台中进行战斗。",
                 platform: "Unity",
                 platforms: ["unity", "windows"],
-                trailerSrcEn: "",
-                previewSrcEn: "https://www.youtube.com/embed/RBUE5s-TOrQ?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0&loop=1&playlist=RBUE5s-TOrQ",
-                walkthroughSrcEn: "RBUE5s-TOrQ",
-                trailerSrcZh: "",
-                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472853417&bvid=BV1gCPyziEuM&cid=36481205995&p=1",
-                walkthroughSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472853417&bvid=BV1gCPyziEuM&cid=36481205995&p=1",
+                videoSrc: "videos/OddFighter.mp4", // Add your video file
                 icon: "👊",
                 poster: "",
                 hasInstaller: true,
@@ -1013,12 +972,7 @@
                 descriptionZh: "战术突破 - 战术向单人FPS游戏",
                 platform: "Unity",
                 platforms: ["unity", "windows"],
-                trailerSrcEn: "",
-                previewSrcEn: "https://www.youtube.com/embed/Eo0yGaoNo_o?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0&loop=1&playlist=Eo0yGaoNo_o",
-                walkthroughSrcEn: "Eo0yGaoNo_o",
-                trailerSrcZh: "",
-                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472921263&bvid=BV18CPyziEKG&cid=36481206463&p=1",
-                walkthroughSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472921263&bvid=BV18CPyziEKG&cid=36481206463&p=1",
+                videoSrc: "videos/OperationGroundhogDay.mp4", // Add your video file
                 icon: "👮‍♂️",
                 poster: "",
                 hasInstaller: false,
@@ -1049,12 +1003,7 @@
                 descriptionZh: "第三人称视角动作游戏，在炼狱中，玩家将在三个关卡中寻找自己的真身。",
                 platform: "Unity",
                 platforms: ["unity", "windows"],
-                trailerSrcEn: "",
-                previewSrcEn: "https://www.youtube.com/embed/0JQsaZMfiQ8?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0&loop=1&playlist=0JQsaZMfiQ8",
-                walkthroughSrcEn: "0JQsaZMfiQ8",
-                trailerSrcZh: "",
-                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116183395212608&bvid=BV1zLPbzzEAR&cid=36508271142&p=1",
-                walkthroughSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116183395212608&bvid=BV1zLPbzzEAR&cid=36508271142&p=1",
+                videoSrc: "videos/Boneward.mp4", // Add your video file
                 icon: "💀️",
                 poster: "",
                 hasInstaller: false,
@@ -1085,12 +1034,7 @@
                 descriptionZh: "亚航与我校课程合作项目，一款机场海关模拟游戏，玩家将扮演海关官员审查和处理入关的乘客信息。",
                 platform: "Unity",
                 platforms: ["unity", "browser"],
-                trailerSrcEn: "",
-                previewSrcEn: "https://www.youtube.com/embed/HM_1YDrFaGc?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0&loop=1&playlist=HM_1YDrFaGc",
-                walkthroughSrcEn: "HM_1YDrFaGc",
-                trailerSrcZh: "",
-                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116182405357536&bvid=BV1kNP4zBEV2&cid=36503161479&p=1",
-                walkthroughSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116182405357536&bvid=BV1kNP4zBEV2&cid=36503161479&p=1",
+                videoSrc: "videos/Next in line plz.mp4", // Your local video file
                 icon: "🛂",
                 poster: "",
                 hasInstaller: false,
@@ -1122,12 +1066,7 @@
                 descriptionZh: "鬼屋路易吉3游戏中大厅场景的重新建模，使用Blender建模和渲染",
                 platform: "Blender",
                 platforms: ["blender"],
-                trailerSrcEn: "",
-                previewSrcEn: "https://www.youtube.com/embed/Xs_65R0ghvk?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0&loop=1&playlist=Xs_65R0ghvk",
-                walkthroughSrcEn: "Xs_65R0ghvk",
-                trailerSrcZh: "",
-                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116182422134542&bvid=BV11ZPxzVEQk&cid=36503162459&p=1",
-                walkthroughSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116182422134542&bvid=BV11ZPxzVEQk&cid=36503162459&p=1",
+                videoSrc: "videos/LugisMansion.mp4", // Add your video file
                 icon: "🏰",
                 poster: "",
                 hasInstaller: false,
@@ -1158,12 +1097,7 @@
                 descriptionZh: "藤原豆腐店场景展示，使用Unreal Engine 5渲染，Blender建模。",
                 platform: "Blender, UE5",
                 platforms: ["blender", "unreal"],
-                trailerSrcEn: "",
-                previewSrcEn: "https://www.youtube.com/embed/QPEx7a906D8?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0&loop=1&playlist=QPEx7a906D8",
-                walkthroughSrcEn: "QPEx7a906D8",
-                trailerSrcZh: "",
-                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472853172&bvid=BV1gCPyziEP6&cid=36481206469&p=1",
-                walkthroughSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472853172&bvid=BV1gCPyziEP6&cid=36481206469&p=1",
+                videoSrc: "videos/FujiwaraTofuShop.mp4", // Add your video file
                 icon: "🏪",
                 poster: "",
                 hasInstaller: false,
@@ -1194,12 +1128,7 @@
                 descriptionZh: "在3dsMax中建模的详细3D水果模型集合，以及设计其的纹理和光照。",
                 platform: "3dsmax",
                 platforms: ["3dsmax"],
-                trailerSrcEn: "",
-                previewSrcEn: "https://www.youtube.com/embed/ufcn0lZFICg?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0&loop=1&playlist=ufcn0lZFICg",
-                walkthroughSrcEn: "ufcn0lZFICg",
-                trailerSrcZh: "",
-                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177439299804&bvid=BV1NXPyz8Ex7&cid=36481010666&p=1",
-                walkthroughSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177439299804&bvid=BV1NXPyz8Ex7&cid=36481010666&p=1",
+                videoSrc: "videos/FruitsModel.mp4", // Add your video file
                 icon: "🍎",
                 poster: "",
                 hasInstaller: false,
@@ -1230,12 +1159,7 @@
                 descriptionZh: "展示以往设计的海报和规则书等平面设计，使用Photoshop制作。",
                 platform: "Photoshop",
                 platforms: ["photoshop"],
-                trailerSrcEn: "",
-                previewSrcEn: "https://www.youtube.com/embed/JQglf5qpbec?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0&loop=1&playlist=JQglf5qpbec",
-                walkthroughSrcEn: "JQglf5qpbec",
-                trailerSrcZh: "",
-                previewSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472918715&bvid=BV18CPyziEYn&cid=36481206510&p=1",
-                walkthroughSrcZh: "//player.bilibili.com/player.html?isOutside=true&aid=116177472918715&bvid=BV18CPyziEYn&cid=36481206510&p=1",
+                videoSrc: "videos/GraphicDesigns.mp4", // Add your video file
                 icon: "🎨",
                 poster: "",
                 hasInstaller: false,
@@ -1279,9 +1203,9 @@
             default: "💻"
         };
 
-        // Current language state - Set to 'zh' as default
+        // Current language state
         let currentLang = 'zh';
-        let selectedIdx = 2;
+        let selectedIdx = 5; // Index of "Next in line, Please" (0-based)
         const row = document.getElementById('projectRow');
         const descTitle = document.getElementById('desc-title');
         const descText = document.getElementById('desc-text');
@@ -1426,23 +1350,23 @@
                 });
 
                 let mediaContent = '';
-                const previewSrc = currentLang === 'zh' ? project.previewSrcZh : project.previewSrcEn;
 
-                if (previewSrc && previewSrc.trim() !== '') {
-                    // For Bilibili on mobile, we need to use a different approach
-                    if (previewSrc.includes('bilibili.com')) {
-                        // Bilibili requires user interaction to play on mobile
-                        // We'll use the iframe but it won't autoplay - that's a Bilibili limitation
-                        mediaContent = `<iframe class="preview-iframe" src="${previewSrc}" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>`;
-                    } else {
-                        // YouTube still works with autoplay
-                        let modifiedSrc = previewSrc;
-                        if (modifiedSrc.includes('youtube.com')) {
-                            modifiedSrc = modifiedSrc.replace(/autoplay=[01]/, `autoplay=${idx === selectedIdx ? '1' : '0'}`);
-                        }
-                        mediaContent = `<iframe class="preview-iframe" src="${modifiedSrc}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-                    }
+                // Check if project has local video
+                if (project.videoSrc) {
+                    const autoplayAttr = idx === selectedIdx ? 'autoplay' : '';
+                    mediaContent = `
+                        <video class="preview-video"
+                               src="${project.videoSrc}"
+                               muted
+                               loop
+                               playsinline
+                               ${autoplayAttr}
+                               poster="${project.poster || ''}">
+                            ${project.icon}
+                        </video>
+                    `;
                 } else {
+                    // Fallback to icon if no video
                     mediaContent = `<div class="fake-thumb"><span style="font-size: 3.5rem; filter: drop-shadow(3px 5px 0 #aaa);">${project.icon}</span></div>`;
                 }
 
@@ -1506,13 +1430,14 @@
             const displayDescription = currentLang === 'zh' ? project.descriptionZh : project.description;
 
             let videoEmbed = '';
-            if (currentLang === 'zh' && project.walkthroughSrcZh) {
-                videoEmbed = `<iframe src="${project.walkthroughSrcZh}" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="width:100%; height:100%;"></iframe>`;
-            } else if (currentLang === 'en' && project.walkthroughSrcEn) {
-                const youtubeId = project.walkthroughSrcEn;
-                if (youtubeId && youtubeId !== 'YOUR_VIDEO_ID' && !youtubeId.includes('YOUR_VIDEO')) {
-                    videoEmbed = `<iframe src="https://www.youtube.com/embed/${youtubeId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%; height:100%;"></iframe>`;
-                }
+            if (project.videoSrc) {
+                // Use local video for detail page
+                videoEmbed = `
+                    <video class="detail-video" controls autoplay muted loop style="width:100%; height:100%; object-fit:cover;">
+                        <source src="${project.videoSrc}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                `;
             }
 
             const detailPage = `
@@ -1767,7 +1692,7 @@
             }
         });
 
-        // Initialize with Chinese language
+        // Initialize
         renderCarousel();
     })();
 </script>
