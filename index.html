@@ -879,7 +879,10 @@
                 descriptionZh: "2D/3D双人联机合作烹饪游戏，需要厨师和服务员配合为所有顾客服务。共三关。",
                 platform: "Unity",
                 platforms: ["unity", "windows"],
-                videoSrc: "videos/LeServe.mp4", // Add your video file
+                // Preview video (auto-play, muted, loop)
+                previewSrc: "videos/LeServeTrailer.mp4",
+                // Walkthrough video (with sound, user controlled)
+                walkthroughSrc: "videos/LeServe.mp4",
                 icon: "🍳",
                 poster: "",
                 hasInstaller: false,
@@ -910,7 +913,8 @@
                 descriptionZh: "2D平台闯关游戏，包含两个关卡和数个敌人种类。",
                 platform: "Unity",
                 platforms: ["unity", "windows"],
-                videoSrc: "videos/NinjasRedemption.mp4", // Add your video file
+                previewSrc: "videos/Ninja's Redemption Trailer.mp4",
+                walkthroughSrc: "videos/Ninja's Redemption.mp4",
                 icon: "⚔️",
                 poster: "",
                 hasInstaller: true,
@@ -941,7 +945,8 @@
                 descriptionZh: "双人在线格斗游戏，在浮动的MMA擂台中进行战斗。",
                 platform: "Unity",
                 platforms: ["unity", "windows"],
-                videoSrc: "videos/OddFighter.mp4", // Add your video file
+                previewSrc: "videos/OddFighter.mp4",
+                walkthroughSrc: "videos/OddFighter.mp4",
                 icon: "👊",
                 poster: "",
                 hasInstaller: true,
@@ -972,7 +977,8 @@
                 descriptionZh: "战术突破 - 战术向单人FPS游戏",
                 platform: "Unity",
                 platforms: ["unity", "windows"],
-                videoSrc: "videos/OperationGroundhogDay.mp4", // Add your video file
+                previewSrc: "videos/OperationGroundhogDay.mp4",
+                walkthroughSrc: "videos/OperationGroundhogDay.mp4",
                 icon: "👮‍♂️",
                 poster: "",
                 hasInstaller: false,
@@ -1003,7 +1009,8 @@
                 descriptionZh: "第三人称视角动作游戏，在炼狱中，玩家将在三个关卡中寻找自己的真身。",
                 platform: "Unity",
                 platforms: ["unity", "windows"],
-                videoSrc: "videos/Boneward.mp4", // Add your video file
+                previewSrc: "videos/Boneward.mp4",
+                walkthroughSrc: "videos/Boneward.mp4",
                 icon: "💀️",
                 poster: "",
                 hasInstaller: false,
@@ -1034,7 +1041,8 @@
                 descriptionZh: "亚航与我校课程合作项目，一款机场海关模拟游戏，玩家将扮演海关官员审查和处理入关的乘客信息。",
                 platform: "Unity",
                 platforms: ["unity", "browser"],
-                videoSrc: "videos/Next in line plz.mp4", // Your local video file
+                previewSrc: "videos/Next in line plz.mp4",
+                walkthroughSrc: "videos/Next in line plz.mp4",
                 icon: "🛂",
                 poster: "",
                 hasInstaller: false,
@@ -1066,7 +1074,8 @@
                 descriptionZh: "鬼屋路易吉3游戏中大厅场景的重新建模，使用Blender建模和渲染",
                 platform: "Blender",
                 platforms: ["blender"],
-                videoSrc: "videos/LugisMansion.mp4", // Add your video file
+                previewSrc: "videos/LuigiMansion.mp4",
+                walkthroughSrc: "videos/LuigiMansion.mp4",
                 icon: "🏰",
                 poster: "",
                 hasInstaller: false,
@@ -1097,7 +1106,8 @@
                 descriptionZh: "藤原豆腐店场景展示，使用Unreal Engine 5渲染，Blender建模。",
                 platform: "Blender, UE5",
                 platforms: ["blender", "unreal"],
-                videoSrc: "videos/FujiwaraTofuShop.mp4", // Add your video file
+                previewSrc: "videos/TeamFujiwaraVideo.mp4",
+                walkthroughSrc: "videos/TeamFujiwaraVideo.mp4",
                 icon: "🏪",
                 poster: "",
                 hasInstaller: false,
@@ -1128,7 +1138,8 @@
                 descriptionZh: "在3dsMax中建模的详细3D水果模型集合，以及设计其的纹理和光照。",
                 platform: "3dsmax",
                 platforms: ["3dsmax"],
-                videoSrc: "videos/FruitsModel.mp4", // Add your video file
+                previewSrc: "videos/FruitVideo.mp4",
+                walkthroughSrc: "videos/FruitVideo.mp4",
                 icon: "🍎",
                 poster: "",
                 hasInstaller: false,
@@ -1159,7 +1170,8 @@
                 descriptionZh: "展示以往设计的海报和规则书等平面设计，使用Photoshop制作。",
                 platform: "Photoshop",
                 platforms: ["photoshop"],
-                videoSrc: "videos/GraphicDesigns.mp4", // Add your video file
+                previewSrc: "videos/GraphicDesignVideo.mp4",
+                walkthroughSrc: "videos/GraphicDesignVideo.mp4",
                 icon: "🎨",
                 poster: "",
                 hasInstaller: false,
@@ -1351,12 +1363,12 @@
 
                 let mediaContent = '';
 
-                // Check if project has local video
-                if (project.videoSrc) {
+                // Use preview video for carousel (auto-play, muted, loop)
+                if (project.previewSrc) {
                     const autoplayAttr = idx === selectedIdx ? 'autoplay' : '';
                     mediaContent = `
                         <video class="preview-video"
-                               src="${project.videoSrc}"
+                               src="${project.previewSrc}"
                                muted
                                loop
                                playsinline
@@ -1430,11 +1442,11 @@
             const displayDescription = currentLang === 'zh' ? project.descriptionZh : project.description;
 
             let videoEmbed = '';
-            if (project.videoSrc) {
-                // Use local video for detail page
+            if (project.walkthroughSrc) {
+                // Use walkthrough video for detail page (with sound, user controlled)
                 videoEmbed = `
-                    <video class="detail-video" controls autoplay muted loop style="width:100%; height:100%; object-fit:cover;">
-                        <source src="${project.videoSrc}" type="video/mp4">
+                    <video class="detail-video" controls autoplay loop style="width:100%; height:100%; object-fit:cover;">
+                        <source src="${project.walkthroughSrc}" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 `;
